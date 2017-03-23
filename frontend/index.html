@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="eng" ng-app="foodz">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./styles/reset.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/css/home.css" />
+    <title>Foodz</title>
+</head>
+
+<body>
+    <div id="topNavBar">
+        <div class="burgerMenu" src="images/hamburger_menu">hamburger</div>
+        <div class="magGlass" src="./images/magnifying_glass"><i class="fa fa-search">mag glass here</i></div>
+        <div class="foodzLogo" src="./images/foodz_logo">foodz logo here</div>
+    </div>
+    
+<!--
+    <div id="sideNavBar">
+        <div id="recent_visits">recent foodz</div>
+        <div ng-repeat="<iterate over 3 most recent notes>"></div>
+        <div id="myPlaces">My Places</div>
+    </div>
+-->
+    
+    <ui-view>
+        <!--ui-router view here-->
+    </ui-view>
+    
+    <!--doesn't belong here
+    <div id="bottomNavButton" src="images/plus_button"></div>
+-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js">
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.js">
+    </script>
+    
+    <script src="js/app.js"></script>
+<!--    <script src="js/service.js"></script>-->
+    <script src="js/controllers/mainCtrl.js"></script>
+<!--
+    <script src="js/newUserCtrl.js"></script>
+    <script src="js/updateCtrl.js"></script>
+    <script src="js/directives.js"></script>
+-->
+    
+    
+    
+    </body>
+</html>

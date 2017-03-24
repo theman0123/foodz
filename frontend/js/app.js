@@ -10,4 +10,9 @@ var app = angular.module('foodz', ['ui.router']);
                 url: '/home',
                 controller: 'mainCtrl'
         })
+            .state('noteEntry', {
+                templateUrl: './views/noteEntry.html',
+                url: '/noteEntry',
+                controller: 'noteEntryCtrl'
+        })
     })

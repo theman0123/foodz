@@ -1,8 +1,8 @@
 <div class=homeContainer>
     <div class="NearYou">Near You Now</div>
-    <div class="placesContainer">
-        <div class="placeName" ng-click="">{{ name }}</div>
-        <div class="placeAddress">{{ address }}</div>
-        <div class="homeRating">{{ rating }}</div>
+    <div class="placesContainer" ng-repeat="place in arrayOfFoodz | limitTo:quantity track by $index">
+        <div class="placeName" ng-click="">{{ place.name }}</div>
+        <div class="placeAddress">{{ place.address }}</div>
+        <div class="homeRating">{{ place.rating }}</div>
     </div>
 </div>

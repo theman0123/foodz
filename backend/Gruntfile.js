@@ -11,7 +11,8 @@ module.exports = function(grunt) {
         },
         files: {
           "../frontend/styles/css/main.css": "../frontend/styles/less/main.less",
-            "../frontend/styles/css/home.css": "../frontend/styles/less/home.less"// destination file and source file
+            "../frontend/styles/css/home.css": "../frontend/styles/less/home.less",
+            "../frontend/styles/css/noteEntry.css": "../frontend/styles/less/noteEntry.less"// destination file and source file
         }
       }
     },

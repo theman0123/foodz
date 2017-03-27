@@ -1,8 +1,10 @@
 <div class=homeContainer>
     <div class="NearYou">Near You Now</div>
-    <div class="placesContainer" ng-repeat="place in arrayOfFoodz | limitTo:quantity track by $index">
-        <div class="placeName" ng-click="">{{ place.name }}</div>
-        <div class="placeAddress">{{ place.address }}</div>
+    <div class="placesContainer" ng-click="createNewRestaurant(place)" ui-sref="noteEntry({id: {{place.id}}})" ng-repeat="place in arrayOfFoodz | limitTo:quantity">
+        <div class="placeName">{{ place.name }}</div>
+        <div class="placeAddress">{{ place.slimAddress }}</div>
         <div class="homeRating">{{ place.rating }}</div>
     </div>
+    <div class="newRestaurant">Add New Restaurant</div>
 </div>
+<!--ng-click="#"-->

@@ -1,7 +1,33 @@
-
-
+var db = require('../index.js').get('db');
 
 module.exports = {
+    getNotes: function(req, res, next) {
+        var id = req.query.id;
+
+        db.get_notes([id], function(err, notes) {
+            res.send(notes);
+        })
+    },
+    getAllNotes: function(req, res, next) {
+        db.get_all_notes(function(err, notes) {
+            res.send(notes);
+        })
+    },
+    postNewNote: function(req, res, next) {
+        var path = req.body;
+        var title = path.title;
+        var message = path.message;
+        var photo = path.photo;
+        var restaurant_id = req.body.id;
+        
+        console.log(title, message, photo, restaurant_id)
+        db.post_new_note([title, message, photo, restaurant_id], function(err, notes) {
+            res.status(200).json(notes);
+            
+        })
+    }
+	
+}
     ///uncomment after you set up db backend///
 //    onLoad: function(req, res, next){
 //        db.get_user_info([<parameters>], function(err, data) {
@@ -10,7 +36,7 @@ module.exports = {
 //        })
 //    }
 
-}
+//}
 
     
     

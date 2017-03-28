@@ -7,5 +7,5 @@
         <div class="itemNote"> {{ place.message }}</div>
     </div>
     <div class="menuRedirect" ng-click="menuRedirect()"><a href="{{ place.menu_url }}">See Online Menu</a></div>
-    <div class="addNoteButton" ng-click="createNewNote()">Create New Note</div>
+    <div class="addNoteButton" ng-click="createNewNote()" ui-sref="newNote()">Create New Note</div>
 </div>

@@ -21,7 +21,14 @@ var mainCtrl = require('./controllers/mainCtrl');
 
 app.get('/newEntry', mainCtrl.getNotes);
 app.get('/notes', mainCtrl.getAllNotes);
+
 app.post('/notes', mainCtrl.postNewNote);
+app.post('/restaurant', mainCtrl.postNewRestaurant);
+
+app.put('/notes', mainCtrl.updateNote);
+
+app.delete('/notes', mainCtrl.deleteNote);
+app.delete('/restaurant', mainCtrl.deleteRestaurant);
 //app.post('/newFoodz', mainCtrl.newFoodz);
 
 app.listen(port, function(){

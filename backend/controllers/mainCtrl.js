@@ -5,7 +5,7 @@ module.exports = {
         var id = req.query.id;
 
         db.get_notes([id], function(err, notes) {
-            res.send(notes);
+            res.status(200).json(notes);
         })
     },
     getAllNotes: function(req, res, next) {
@@ -15,61 +15,54 @@ module.exports = {
     },
     postNewNote: function(req, res, next) {
         var path = req.body;
+        
         var title = path.title;
         var message = path.message;
         var photo = path.photo;
         var restaurant_id = req.body.id;
         
-        console.log(title, message, photo, restaurant_id)
         db.post_new_note([title, message, photo, restaurant_id], function(err, notes) {
             res.status(200).json(notes);
             
         })
+    },
+    postNewRestaurant: function(req, res, next) {
+        var path = req.body;
+        
+        var name = path.name;
+        var address = path.address;
+        var slim_address = path.slim_address;
+        var rating = path.rating;
+        var id = path.id;
+        var cuisine_type = path.cuisine_type;
+        var menu_url = path.menu_url;
+
+        db.post_new_restaurant([name, address, slim_address, rating, id, cuisine_type, menu_url], function(err, notes) {
+            res.send(notes);
+        })
+    },
+    updateNote: function(req, res, next) {
+        var path = req.body;
+        
+        var message = path.message;
+        var photo = path.photo;
+        var note_title = path.note_title;
+        var note_id = path.note_id;
+        
+        db.update_note([message, photo, note_title, note_id], function(err, notes) {
+            res.send(notes);
+        })
+    },
+    deleteNote: function(req, res, next) {
+        db.delete_note([req.body.note_id], function(err, notes) {
+            res.send(notes);
+        })
+    },
+    deleteRestaurant: function(req, res, next) {
+        db.delete_restaurant([req.body.restaurant_id], function(err, notes) {
+            res.send(err);
+        })
     }
 	
 }
-    ///uncomment after you set up db backend///
-//    onLoad: function(req, res, next){
-//        db.get_user_info([<parameters>], function(err, data) {
-//            console.log(err, data);
-//            res.send(data);
-//        })
-//    }
-
-//}
-
     
-    
-    //var app = require('../index.js');
-//var zomato = require('zomato');
-//
-//var lat = '40.758701';
-//var lon = '-111.876183';
-//
-//var client = zomato.createClient ({
-//    userKey: '451e00ec0a1c87145925d326a5319666'
-//});
-//move to front end when appropiate//
-//if ("geolocation" in navigator) {
-//    var lat = navigator.geolocation.getCurrentPostition(function(position) {
-//    return position.coords.latitude;
-//})
-//    var lon = navigator.geolocation.getCurrentPostition(function(position) {
-//    return position.coords.latitude;
-//})
-//} else {
-//    
-//}
-//       client.getLocations({
-////           query: "Salt Lake City",
-//           lat: lat,
-//           lon: lon,
-//           count: '10'
-//       }, function(err, result) {
-//           if(!err) {
-//               res.status(200).send(result);
-//           } else {
-//               res.send(err);
-//           }
-//       });
-//    }

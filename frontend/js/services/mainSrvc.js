@@ -21,7 +21,7 @@ angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams) {
                         name: item.restaurant.name,
                         address: item.restaurant.location.address,
                         slimAddress: path.substring(0, path.length - 10) + "...",
-                        rating: item.restaurant.user_rating.aggregate_rating,
+                        rating: Math.floor(item.restaurant.user_rating.aggregate_rating),
                         id: item.restaurant.id,
                         cuisine_type: item.restaurant.cuisines,
                         menu_url: item.restaurant.menu_url
@@ -51,9 +51,14 @@ angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams) {
     
     this.createNewRestaurant = function(place) {
         console.log('create new restaurant', place);
-        this.currentPlace = place;
-//        $http.post('/someUrl', data, config).then(successCallback, errorCallback);
-        //post data to backend and save to a db//
+        
+        $http.post('/restaurant', place);
+    }
+    
+    this.saveNewNote = function(id, obj) {
+        console.log('new note', id, 'noteObj', obj);
+        
+        $http.post('/notes', obj);    
     }
 })
 

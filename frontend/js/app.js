@@ -17,7 +17,7 @@ var app = angular.module('foodz', ['ui.router']);
         })
             .state('newNote', {
                 templateUrl: './views/newNote.html',
-                url: '/newNote', //:id
-//                controller: 'newNoteCtrl'
+                url: '/newNote/:id', 
+                controller: 'newNoteCtrl'
         })
     })

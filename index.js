@@ -10,17 +10,18 @@ var port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(cors());
-
+app.use(express.static(__dirname + '/frontend'))
 var massiveInstance = massive.connectSync({
     connectionString: "postgres://postgres:postgres@localhost/foodz"
 });
 
 app.set('db', massiveInstance);
 
-var mainCtrl = require('./controllers/mainCtrl');
+var mainCtrl = require('./backend/controllers/mainCtrl');
 
 app.get('/newEntry', mainCtrl.getNotes);
 app.get('/notes', mainCtrl.getAllNotes);
+app.get('/restaurants', mainCtrl.getAllRestaurants);
 
 app.post('/notes', mainCtrl.postNewNote);
 app.post('/restaurant', mainCtrl.postNewRestaurant);

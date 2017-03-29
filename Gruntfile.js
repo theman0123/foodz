@@ -10,10 +10,10 @@ module.exports = function(grunt) {
           optimization: 2
         },
         files: {
-          "../frontend/styles/css/main.css": "../frontend/styles/less/main.less",
-            "../frontend/styles/css/home.css": "../frontend/styles/less/home.less",
-            "../frontend/styles/css/noteEntry.css": "../frontend/styles/less/noteEntry.less",
-            "../frontend/styles/css/newNote.css": "../frontend/styles/less/newNote.less"// destination file and source file
+          "./frontend/styles/css/main.css": "./frontend/styles/less/main.less",
+            "./frontend/styles/css/home.css": "./frontend/styles/less/home.less",
+            "./frontend/styles/css/noteEntry.css": "./frontend/styles/less/noteEntry.less",
+            "./frontend/styles/css/newNote.css": "./frontend/styles/less/newNote.less"// destination file and source file
         }
       }
     },

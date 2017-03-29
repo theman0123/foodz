@@ -1,3 +1,32 @@
+//mix-ins//
+.box-shadow (@string) {
+	-webkit-box-shadow: @string;
+	-moz-box-shadow:    @string;
+	box-shadow:         @string;
+}
+.inner-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
+	-webkit-box-shadow: inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+	-moz-box-shadow:    inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+	box-shadow:         inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+}
+.horizontal-gradient (@startColor: #eee, @endColor: white) {
+ 	background-color: @startColor;
+	background-image: -webkit-gradient(linear, left top, right top, from(@startColor), to(@endColor));
+	background-image: -webkit-linear-gradient(left, @startColor, @endColor);
+	background-image: -moz-linear-gradient(left, @startColor, @endColor);
+	background-image: -ms-linear-gradient(left, @startColor, @endColor);
+	background-image: -o-linear-gradient(left, @startColor, @endColor);
+}
+.border-radius (@radius: 5px) {
+	-webkit-border-radius: @radius;
+	-moz-border-radius:    @radius;
+	border-radius:         @radius;
+
+	-moz-background-clip:    padding;
+	-webkit-background-clip: padding-box;
+	background-clip:         padding-box;
+}
+
 .container {
     height: 80vh;
     display: flex;
@@ -18,5 +47,23 @@ textarea {
     background-color: #f8f8f8;
     font-size: 16px;
     resize: none;
+}
+
+.saveButton {
+	width: 150px;
+	height: 55px;
+	line-height: 55px;
+	text-align: center;
+    margin: 20px;
+	.border-radius (3px);
+	.horizontal-gradient (#45CD2D, #209B0A);
+	.box-shadow (3px 5px rgba(15, 82, 3, 0.75));
+	&:active {
+		.box-shadow (1px 2px rgba(0, 0, 0, 0.75));
+		.inner-shadow(0, 5px, 8px, 0, 0.55);
+	}
+	&:hover {
+	cursor: pointer;
+	}
 }
 

@@ -3,20 +3,23 @@ angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams) {
     var nearArray = [];
     var count = 4;
     var meters = "40,000";
-//    ?count=', count + 'radius=', meters + 'lat=', lat +'lon=', lon + "'"
-    this.getFoodz = function(lat, lon) {
+    
+    var findItem = function(item) {
+        return item.id === $stateParams.id;
+    }
+    
+    var getFoodz = function(lat, lon) {
            
         if(lat && lon) {    
             return $http.get(('https://developers.zomato.com/api/v2.1/search?' + 'lat=' + lat +'&lon=' + lon), {
                 headers: {"X-Zomato-API-Key": "451e00ec0a1c87145925d326a5319666"}
             }).then(function(response){
                 var data = response.data.restaurants;
-
+   
                 data.forEach(function(item) {
-                    ///consider putting "{{NumOfMiles}} miles away from you/// instead of actual address///
-                    //you could also push more info to back end....//
+//'minutes away' vs '<actual address>'???
                     var path = item.restaurant.location.address;
-//                    console.log(item);
+
                     var Restaurant = {
                         name: item.restaurant.name,
                         address: item.restaurant.location.address,
@@ -28,35 +31,56 @@ angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams) {
                     }
                     nearArray.push(Restaurant);
                 }) 
-            }) 
-//            console.log(nearArray)
-        } //won't return nearArray;
+            })   
+        }
     }
+    this.pullRestaurants = function () {
+        
+        if ("geolocation" in navigator) {
+
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var lat = position.coords.latitude;
+                var lon = position.coords.longitude;
+            
+                getFoodz(lat, lon);
+            })
+        } else {
+          console.log('no geolocation');
+        }
+    }
+    
     this.returnArray =function() {
         return nearArray;
     }
-    this.returnObject = function(idx) {
-//        console.log('return obj', idx)
-        return nearArray.find(function(place) {
-
-            if(idx === place.id) {
-                if(!place.message) {
-                    //modify css to say 'no notes here'//
-                    console.log('no notes!')
-                    return place;
-                } else return place;
-            } 
+    
+    //this.next = function (array) {
+    //find last item displayed in array[3],
+    //display next 4 items//
+    
+    this.returnObject = function() {
+        return nearArray.find(findItem);
+    }
+    
+    this.getNotes = function(idx) {
+        return $http.get('/notes').then(function(response) {
+            var item = response.data;
+            console.log(response.data)
+            if(!item.message) {
+//                    modify css to say 'no notes here'//
+                console.log('no notes!')
+                }else return item;
         })
     }
     
+    
     this.createNewRestaurant = function(place) {
-        console.log('create new restaurant', place);
+        console.log('new restaurant created', place);
         
         $http.post('/restaurant', place);
     }
     
-    this.saveNewNote = function(id, obj) {
-        console.log('new note', id, 'noteObj', obj);
+    this.saveNewNote = function(idx, obj) {
+        console.log('new note saved', idx, 'noteObj', obj);
         
         $http.post('/notes', obj);    
     }

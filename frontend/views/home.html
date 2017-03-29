@@ -3,7 +3,7 @@
     <div class="placesContainer" ng-click="createNewRestaurant(place)" ui-sref="noteEntry({id: {{place.id}}})" ng-repeat="place in arrayOfFoodz | limitTo:quantity">
         <div class="placeName">{{ place.name }}</div>
         <div class="placeAddress">{{ place.slimAddress }}</div>
-        <div class="homeRating">{{ place.rating }}</div>
+        <div class="homeRating">>>{{ place.rating }}</div>
     </div>
     <div class="newRestaurant">Click On A Restaurant To Add</div>
 </div>

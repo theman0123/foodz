@@ -1,11 +1,6 @@
 <div class="container">
-    <div class="placeInfo">
-        <div class="itemName"> {{ place.name }}</div>
-        <div class="itemRating"> {{ place.rating }}</div>
-    </div>
-    <div class="itemContainer">
-        <div class="itemNote"> {{ place.message }}</div>
-    </div>
-    <div class="menuRedirect" ng-click="menuRedirect()"><a href="{{ place.menu_url }}">See Online Menu</a></div>
-    <div class="addNoteButton" ui-sref="newNote({id: place.id})">Create New Note</div>
+    <list-view></list-view>
+    <div class="menuRedirect" ng-click="menuRedirect()"><a href="{{ item.menu_url }}">See Online Menu</a></div>
+    <!-- make 2 more directive to encapsulate the surrounding html-->
+    <div class="addNoteButton" ui-sref="newNote({id: item.id})">Create New Note</div>
 </div>

@@ -1,26 +1,17 @@
 angular.module('foodz').controller('mainCtrl', function($scope, mainSrvc, $stateParams){
 
-    function onLoad() {
-        if ("geolocation" in navigator) {
+    $scope.quantity = 4;
 
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var lat = position.coords.latitude;
-                var lon = position.coords.longitude;
-                
-                mainSrvc.getFoodz(lat, lon);
-                
-                $scope.quantity = 4;
-                $scope.arrayOfFoodz = mainSrvc.returnArray();
-            })
-        } else {
-          console.log('no geolocation');
-        }
-    }
+    var pullRestaurants = function() {mainSrvc.pullRestaurants()};
+    pullRestaurants();
+    
+    $scope.arrayOfFoodz = mainSrvc.returnArray();
     
     $scope.createNewRestaurant = function(place) {
         mainSrvc.createNewRestaurant(place);
     }
-    onLoad();
+    
+    //$scope.next = mainSrvc.next(array);
 })
   
 

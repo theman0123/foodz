@@ -1,0 +1,4 @@
+<div class="itemContainer" ng-repeat="place in restaurants | limitTo:quantity"> <!--| filter:search">-->
+    <div class="itemTitle">{{ place.name }}</div>
+    <div class="itemMessage"> {{ place.rating }}</div>
+</div>

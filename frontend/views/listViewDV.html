@@ -2,7 +2,7 @@
     <div class="itemName"> {{ place.name }}</div>
     <div class="itemRating"> >>{{ place.rating }}</div>
 </div>
-<div class="itemContainer" ng-repeat="note in foodz | limitTo:quantity">
+<div class="itemContainer" ng-repeat="note in foodz | limitTo:quantity | filter:search">
     <div class="itemTitle">{{ note.note_title }}</div>
     <div class="itemMessage"> {{ note.note_message }}</div>
 </div>

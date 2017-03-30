@@ -19,4 +19,12 @@ var app = angular.module('foodz', ['ui.router']);
                 url: '/newNote/:id', 
                 controller: 'newNoteCtrl'
         })
+            .state('allNotes', {
+                templateUrl: './views/allNotes.html',
+                url: '/allNotes'
+        })
+            .state('myRestaurants', {
+                templateUrl: './views/myRestaurants.html',
+                url: '/myRestaurants'
+        })
     })

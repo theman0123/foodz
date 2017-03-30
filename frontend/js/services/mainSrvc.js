@@ -51,7 +51,11 @@ angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams) {
         }
     }
     
-    this.returnArray =function() {
+    this.getAllRestaurants = function() {
+        return $http.get('/restaurants');
+    }
+    
+    this.returnArray = function() {
         return nearArray;
     }
     
@@ -73,13 +77,13 @@ angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams) {
     
     
     this.createNewRestaurant = function(place) {
-        console.log('new restaurant created', place);
+//        console.log('new restaurant created', place);
         
         $http.post('/restaurant', place);
     }
     
     this.saveNewNote = function(idx, obj) {
-        console.log('new note saved', idx, 'noteObj', obj);
+//        console.log('new note saved', idx, 'noteObj', obj);
         
         $http.post('/notes', obj);    
     }

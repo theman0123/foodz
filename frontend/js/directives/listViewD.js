@@ -10,16 +10,28 @@ var app = angular.module('foodz');
             },
             controller: function($scope, mainSrvc, $stateParams) {
                 var idx = $stateParams.id;
+                $scope.id = $stateParams.id;
                 $scope.quantity = 4;
                 
                 $scope.place = mainSrvc.returnObject();
-                
-                $scope.something = mainSrvc.getNotes().then(function(response) {
+                //better way to do the below?//
+                $scope.getNotes = mainSrvc.getNotes().then(function(response) {
                     var item = response.data;
-                    $scope.foodz = item.filter(function(note) {
-                        return note.restaurant_id === parseInt(idx);  
-                    }) 
-                }) 
+                    if(!idx) {
+                        $scope.foodz = item;
+                    } else if(idx) {
+                        $scope.foodz = item.filter(function(note) {
+                            return note.restaurant_id === parseInt(idx);  
+                        })
+                    }
+                })
+            },
+            link: function(scope, elem, attr) {
+                if(!scope.id) {
+                    scope.place = 'can this be done?';
+                    console.log('inside link', scope.place)
+                    
+                }
             }
         }
     })

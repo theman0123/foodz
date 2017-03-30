@@ -5,12 +5,21 @@ var app = angular.module('foodz');
             templateUrl: '../../views/listViewDV.html',
             restrict: 'E',
             scope: {
-                item: '='
+                foodz: '=',
+                place: '='
             },
             controller: function($scope, mainSrvc, $stateParams) {
                 var idx = $stateParams.id;
-                $scope.place = mainSrvc.returnObject(idx);
-                $scope.item = mainSrvc.getNotes(idx);
+                $scope.quantity = 4;
+                
+                $scope.place = mainSrvc.returnObject();
+                
+                $scope.something = mainSrvc.getNotes().then(function(response) {
+                    var item = response.data;
+                    $scope.foodz = item.filter(function(note) {
+                        return note.restaurant_id === parseInt(idx);  
+                    }) 
+                }) 
             }
         }
     })

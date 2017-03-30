@@ -1,5 +1,5 @@
 angular.module('foodz').controller('mainCtrl', function($scope, mainSrvc, $stateParams){
-
+//    $scope.index = 3;
     $scope.quantity = 4;
 
     var pullRestaurants = function() {mainSrvc.pullRestaurants()};
@@ -11,7 +11,10 @@ angular.module('foodz').controller('mainCtrl', function($scope, mainSrvc, $state
         mainSrvc.createNewRestaurant(place);
     }
     
-    //$scope.next = mainSrvc.next(array);
+//    $scope.prev = mainSrvc.prev();
+    $scope.next = function() {
+        console.log('next clicked')
+    }
 })
   
 

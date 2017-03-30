@@ -1,5 +1,39 @@
+////mixins///
+.drop-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
+	-webkit-box-shadow:	@x @y @blur @spread rgba(0, 0, 0, @alpha);
+	-moz-box-shadow:	@x @y @blur @spread rgba(0, 0, 0, @alpha);
+	box-shadow:		@x @y @blur @spread rgba(0, 0, 0, @alpha);
+}
+.box-shadow (@string) {
+	-webkit-box-shadow: @string;
+	-moz-box-shadow:    @string;
+	box-shadow:         @string;
+}
+.inner-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
+	-webkit-box-shadow: inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+	-moz-box-shadow:    inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+	box-shadow:         inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+}
+.horizontal-gradient (@startColor: #eee, @endColor: white) {
+ 	background-color: @startColor;
+	background-image: -webkit-gradient(linear, left top, right top, from(@startColor), to(@endColor));
+	background-image: -webkit-linear-gradient(left, @startColor, @endColor);
+	background-image: -moz-linear-gradient(left, @startColor, @endColor);
+	background-image: -ms-linear-gradient(left, @startColor, @endColor);
+	background-image: -o-linear-gradient(left, @startColor, @endColor);
+}
+.border-radius (@radius: 5px) {
+	-webkit-border-radius: @radius;
+	-moz-border-radius:    @radius;
+	border-radius:         @radius;
+
+	-moz-background-clip:    padding;
+	-webkit-background-clip: padding-box;
+	background-clip:         padding-box;
+}
+///LESS/////
 .container {
-    height: 80vh;
+    max-height: 85vh;
     display: flex;
     flex-direction: column;
 }
@@ -12,31 +46,42 @@
     
     .itemName {
         width: 70vw;
-        font-size: 24px;
+        font-size: 28px;
         text-align: center;
+        padding: 5px;
     }
 
     .itemRating {
-        width: 40vw;
-        padding-top: 20px;
-        padding-left: 50px;
+        width: 25vw;
+        padding-top: 7px;
+        font-size: 20px;
     }
 }
 
 .itemContainer {
-    height: 22vh;
+    height: 15vh;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
     padding: 5px;
     word-wrap: break-word;
     border-left: thick solid blue;
-    margin: 5px;
+    margin: 10px;
+    background-color: #eaecef;
+    .drop-shadow (0, 2px, 3px, 0, 0.25);
 }
 
+.itemTitle {
+    text-align: center;
+    font-size: 24px;
+    height: 20%;
+}
 
-.itemNote {
-    
+.itemMessage {
+    text-align: center;
+    font-size: 18px;
+    height: 60%;
+    padding: 5px;
 }
 
 .menuRedirect {
@@ -53,10 +98,23 @@
 }
 
 .addNoteButton {
-    height: 50px;
-    width: 50px;
     position: fixed;
     bottom: 0;
     right: 0;
     margin-bottom: 10px;
+	width: 100px;
+	height: 35px;
+	line-height: 35px;
+	text-align: center;
+    margin: 10px;
+	.border-radius (3px);
+	.horizontal-gradient (#45CD2D, #209B0A);
+	.box-shadow (3px 5px rgba(15, 82, 3, 0.75));
+	&:active {
+		.box-shadow (1px 2px rgba(0, 0, 0, 0.75));
+		.inner-shadow(0, 5px, 8px, 0, 0.55);
+	}
+	&:hover {
+	cursor: pointer;
+	}
 }

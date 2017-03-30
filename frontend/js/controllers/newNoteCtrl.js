@@ -1,8 +1,8 @@
 angular.module('foodz').controller('newNoteCtrl', function($scope, mainSrvc, $stateParams) {
     var idx = $stateParams.id;
-        console.log($stateParams.id);
 
-    $scope.saveNewNote = function(idx) {
+    $scope.item = mainSrvc.returnObject();
+    $scope.saveNewNote = function() {
         var Note = {
             title: $scope.title,
             message: $scope.message,
@@ -10,5 +10,8 @@ angular.module('foodz').controller('newNoteCtrl', function($scope, mainSrvc, $st
             restaurant_id: idx
         }
         mainSrvc.saveNewNote($stateParams.id, Note);
+        
+        $scope.title = '';
+        $scope.message = 'Added!';
     }
 })

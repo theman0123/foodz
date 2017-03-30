@@ -1,4 +1,8 @@
 <div class=homeContainer>
+    <div class="nextAndPreviousContainer">
+        <div class="previous">Prev.</div>
+        <div class="next" ng-click="next()">Next</div>
+    </div>
     <div class="NearYou">Near You Now</div>
     <div class="placesContainer" ng-click="createNewRestaurant(place)" ui-sref="noteEntry({id: {{place.id}}})" ng-repeat="place in arrayOfFoodz | limitTo:quantity">
         <div class="placeName">{{ place.name }}</div>

@@ -5,7 +5,9 @@ angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams) {
     var meters = "40,000";
     
     var findItem = function(item) {
-        return item.id === $stateParams.id;
+        var idx = $stateParams.id;
+//        console.log(idx)
+        return item.id === idx;
     }
     
     var getFoodz = function(lat, lon) {
@@ -53,23 +55,20 @@ angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams) {
         return nearArray;
     }
     
-    //this.next = function (array) {
+//    this.prev
+    
+    this.next = function(index) {
+        console.log('next clicked', index)   
+    }
     //find last item displayed in array[3],
     //display next 4 items//
     
     this.returnObject = function() {
         return nearArray.find(findItem);
     }
-    
-    this.getNotes = function(idx) {
-        return $http.get('/notes').then(function(response) {
-            var item = response.data;
-            console.log(response.data)
-            if(!item.message) {
-//                    modify css to say 'no notes here'//
-                console.log('no notes!')
-                }else return item;
-        })
+
+    this.getNotes = function() {
+        return $http.get('/notes');
     }
     
     

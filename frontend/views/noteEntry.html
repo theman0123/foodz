@@ -1,6 +1,5 @@
 <div class="container">
     <list-view></list-view>
-    <div class="menuRedirect" ng-click="menuRedirect()"><a href="{{ item.menu_url }}">See Online Menu</a></div>
-    <!-- make 2 more directive to encapsulate the surrounding html-->
-    <div class="addNoteButton" ui-sref="newNote({id: item.id})">Create New Note</div>
+    <menu-redirect></menu-redirect>
+    <new-note></new-note>
 </div>

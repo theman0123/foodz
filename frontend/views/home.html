@@ -1,13 +1,12 @@
 <div class=homeContainer>
-    <div class="nextAndPreviousContainer">
-        <div class="previous">Prev.</div>
-        <div class="next" ng-click="next()">Next</div>
+    <div class="refreshButtonContainer">
+        <div class="refreshButton" ng-click="refresh()">Get More Results</div>
     </div>
     <div class="NearYou">Near You Now</div>
-    <div class="placesContainer" ng-click="createNewRestaurant(place)" ui-sref="noteEntry({id: {{place.id}}})" ng-repeat="place in arrayOfFoodz | limitTo:quantity">
+    <div class="placesContainer" ng-click="createNewRestaurant(place)" ui-sref="noteEntry({id: {{place.id}}})" ng-repeat="place in arrayOfFoodz">
         <div class="placeName">{{ place.name }}</div>
         <div class="placeAddress">{{ place.slimAddress }}</div>
         <div class="homeRating">>>{{ place.rating }}</div>
     </div>
-    <div class="newRestaurant">Click On A Restaurant To Add</div>
 </div>
+    <div class="newRestaurant">Click On A Restaurant To Add</div>

@@ -11,7 +11,7 @@ angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams) {
     }
     
     var getFoodz = function(lat, lon) {
-           
+        
         if(lat && lon) {    
             return $http.get(('https://developers.zomato.com/api/v2.1/search?' + 'lat=' + lat +'&lon=' + lon), {
                 headers: {"X-Zomato-API-Key": "451e00ec0a1c87145925d326a5319666"}
@@ -19,7 +19,6 @@ angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams) {
                 var data = response.data.restaurants;
    
                 data.forEach(function(item) {
-//'minutes away' vs '<actual address>'???
                     var path = item.restaurant.location.address;
 
                     var Restaurant = {
@@ -32,7 +31,7 @@ angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams) {
                         menu_url: item.restaurant.menu_url
                     }
                     nearArray.push(Restaurant);
-                }) 
+                })
             })   
         }
     }
@@ -54,18 +53,17 @@ angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams) {
     this.getAllRestaurants = function() {
         return $http.get('/restaurants');
     }
-    
+//    var index = 0;
+//    var fourAtATime = function(item) {
+//        console.log(item, index)
+//        return item[index] >= index && item[index] < (index + 4)
+//    }
     this.returnArray = function() {
+//        console.log(fourAtATime)
+//       return nearArray.filter(fourAtATime);
+//        index +=4;
         return nearArray;
     }
-    
-//    this.prev
-    
-    this.next = function(index) {
-        console.log('next clicked', index)   
-    }
-    //find last item displayed in array[3],
-    //display next 4 items//
     
     this.returnObject = function() {
         return nearArray.find(findItem);

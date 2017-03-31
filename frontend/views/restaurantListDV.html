@@ -1,4 +1,5 @@
-<div class="itemContainer" ng-repeat="place in restaurants | limitTo:quantity"> <!--| filter:search">-->
+<input type="text" class="titleEntry" ng-model="search" placeholder="Search Restaurants...">
+<div class="itemContainer" ng-repeat="place in restaurants | filter:search | limitTo:quantity">
     <div class="itemTitle">{{ place.name }}</div>
     <div class="itemMessage"> {{ place.rating }}</div>
 </div>

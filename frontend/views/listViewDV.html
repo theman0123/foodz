@@ -1,8 +1,9 @@
 <div class="placeInfo">
-    <div class="itemName"> {{ place.name }}</div>
-    <div class="itemRating"> >>{{ place.rating }}</div>
+    <input type="text" class="titleEntry" ng-model="search" placeholder="Search Notes...">
+    <div class="itemName" ng-show="show"> {{ place.name }}</div>
+    <div class="itemRating" ng-show="show"> >>{{ place.rating }}</div>
 </div>
-<div class="itemContainer" ng-repeat="note in foodz | limitTo:quantity | filter:search">
+<div class="itemContainer" ng-repeat="note in foodz | filter:search | limitTo:quantity">
     <div class="itemTitle">{{ note.note_title }}</div>
     <div class="itemMessage"> {{ note.note_message }}</div>
 </div>

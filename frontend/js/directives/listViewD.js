@@ -12,26 +12,22 @@ var app = angular.module('foodz');
                 var idx = $stateParams.id;
                 $scope.id = $stateParams.id;
                 $scope.quantity = 4;
-                
+
                 $scope.place = mainSrvc.returnObject();
-                //better way to do the below?//
-                $scope.getNotes = mainSrvc.getNotes().then(function(response) {
+
+                $scope.foodz = mainSrvc.getNotes().then(function(response) {
                     var item = response.data;
                     if(!idx) {
+                        $scope.show = false;
                         $scope.foodz = item;
-                    } else if(idx) {
+                    } else {
+                        $scope.show = true;
                         $scope.foodz = item.filter(function(note) {
                             return note.restaurant_id === parseInt(idx);  
                         })
                     }
+                console.log($scope.show);
                 })
-            },
-            link: function(scope, elem, attr) {
-                if(!scope.id) {
-                    scope.place = 'can this be done?';
-                    console.log('inside link', scope.place)
-                    
-                }
             }
         }
     })

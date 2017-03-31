@@ -3,10 +3,10 @@ angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams) {
     var nearArray = [];
     var count = 4;
     var meters = "40,000";
-    
+
     var findItem = function(item) {
         var idx = $stateParams.id;
-//        console.log(idx)
+//        console.log('finditem idx', idx, item.id)
         return item.id === idx;
     }
     
@@ -53,15 +53,7 @@ angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams) {
     this.getAllRestaurants = function() {
         return $http.get('/restaurants');
     }
-//    var index = 0;
-//    var fourAtATime = function(item) {
-//        console.log(item, index)
-//        return item[index] >= index && item[index] < (index + 4)
-//    }
     this.returnArray = function() {
-//        console.log(fourAtATime)
-//       return nearArray.filter(fourAtATime);
-//        index +=4;
         return nearArray;
     }
     

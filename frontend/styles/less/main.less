@@ -1,4 +1,19 @@
 
+////mixins///
+.drop-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
+	-webkit-box-shadow:	@x @y @blur @spread rgba(0, 0, 0, @alpha);
+	-moz-box-shadow:	@x @y @blur @spread rgba(0, 0, 0, @alpha);
+	box-shadow:		@x @y @blur @spread rgba(0, 0, 0, @alpha);
+}
+.horizontal-gradient (@startColor: #eee, @endColor: white) {
+ 	background-color: @startColor;
+	background-image: -webkit-gradient(linear, left top, right top, from(@startColor), to(@endColor));
+	background-image: -webkit-linear-gradient(left, @startColor, @endColor);
+	background-image: -moz-linear-gradient(left, @startColor, @endColor);
+	background-image: -ms-linear-gradient(left, @startColor, @endColor);
+	background-image: -o-linear-gradient(left, @startColor, @endColor);
+}
+///LESS///
 body {
     height: 100vh;
     width: 100vw;
@@ -9,7 +24,10 @@ body {
     height: 10vh;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    margin-bottom: 15px;
+//    background-color: #A5DFF3;
+    .horizontal-gradient (#5B7DEA, #A5DFF3);
+    .drop-shadow (0, 4px, 6px, 0, 0.25);
 }
 
 .restaurantLogo {

@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="restaurantTitle">{{ item.name }}</div>
+    <form action="/newNote">
+        <label class="foodName">Food Name</label>
+        <br>
+        <input type="text" class="searchBar" ng-model="title" placeholder="Chicken Tacos">
+        <br>
+        <label class="notesDescription">Notes/Description</label>
+        <br>
+        <textarea ng-model="message" placeholder="tacos are delish, get more salsa next time"></textarea>
+
+        <label for="rating" class="noteRating">Rating</label>
+        <select id="rating" name="rating">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+    </select>
+    </form>
+    <div class="saveButton" ng-click="saveNewNote()">Save Note</div>
+    <menu-redirect></menu-redirect>
+</div>

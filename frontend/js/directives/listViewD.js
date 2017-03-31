@@ -8,14 +8,16 @@ var app = angular.module('foodz');
                 foodz: '=',
                 place: '='
             },
-            controller: function($scope, mainSrvc, $stateParams) {
+            controller: function($scope, mainSrvc, $stateParams, $location) {
                 var idx = $stateParams.id;
-                $scope.id = $stateParams.id;
+                
+                console.log($location);
+                
                 $scope.quantity = 4;
 
                 $scope.place = mainSrvc.returnObject();
 
-                $scope.foodz = mainSrvc.getNotes().then(function(response) {
+                $scope.getFoodz = mainSrvc.getNotes().then(function(response) {
                     var item = response.data;
                     if(!idx) {
                         $scope.show = false;
@@ -26,8 +28,18 @@ var app = angular.module('foodz');
                             return note.restaurant_id === parseInt(idx);  
                         })
                     }
-                console.log($scope.show);
                 })
+                    
+            },
+            link: function(scope, element, attrs) {
+                //need to get your conditional statement correct//
+//                console.log('getFoodz', scope.getFoodz, 'scope', scope)
+//                var index = 0;
+                var html = '<div class="noNotes">No Notes Yet</div>'
+                if (scope.getFoodz < 1) {
+                    console.log('true')
+                    element.html(html);
+                }
             }
         }
     })

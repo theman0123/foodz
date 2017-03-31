@@ -1,9 +1,9 @@
 <div class="placeInfo">
-    <input type="text" class="titleEntry" ng-model="search" placeholder="Search Notes...">
+    <input type="text" class="searchBar" ng-model="search" placeholder="Search Notes...">
     <div class="itemName" ng-show="show"> {{ place.name }}</div>
     <div class="itemRating" ng-show="show"> >>{{ place.rating }}</div>
 </div>
-<div class="itemContainer" ng-repeat="note in foodz | filter:search | limitTo:quantity">
+<div class="itemContainer" ui-sref="editNotes({id: note.restaurant_id})" ng-repeat="note in foodz | filter:search">
     <div class="itemTitle">{{ note.note_title }}</div>
     <div class="itemMessage"> {{ note.note_message }}</div>
 </div>

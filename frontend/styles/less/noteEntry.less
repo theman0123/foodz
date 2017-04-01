@@ -31,6 +31,11 @@
 	-webkit-background-clip: padding-box;
 	background-clip:         padding-box;
 }
+.text {
+    font-family: 'pc';
+    font-size: 30px;
+    color: #353539;
+}
 ///LESS/////
 .container {
     max-height: 85vh;
@@ -43,6 +48,7 @@
     display: flex;
     flex-direction: row;
     width: 100vw;
+
 }
     
 .itemName {
@@ -66,22 +72,25 @@
     flex-direction: column;
     justify-content: space-around;
     padding: 5px;
-    border-left: thick solid blue;
+    border-left: thick solid black;
     margin: 10px;
-    background-color: #eaecef;
+    background-color: #A9A9AD;
     border-radius: 2px;
+    position: relative;
+    opacity: 1;
+    .text();
     .drop-shadow (0, 2px, 3px, 0, 0.25);
 }
 
 .itemTitle {
+    font-size: 40px;
+    font-weight: 800;
     text-align: center;
-    font-size: 24px;
     height: 20%;
 }
 
 .itemMessage {
     text-align: center;
-    font-size: 18px;
     height: 60%;
     padding: 5px;
 }
@@ -93,6 +102,9 @@
     bottom: 0;
     left: 0;
     margin-bottom: 10px;
+//    position: relative;
+    opacity: 1;
+    z-index: 2;
     a {
         text-decoration: none;
         color: gray;
@@ -119,6 +131,20 @@
 	&:hover {
 	cursor: pointer;
 	}
+}
+
+.bottomContainer {
+    width: 100%;
+    min-height: 70px;
+    padding-top: 7px;
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    background-color: #C6C7CA;
+    .text();
+//    .horizontal-gradient (#55575F, #959699);
+    .box-shadow (5px -5px 3px rgba(0, 0, 0, 0.20));
+//    height: 200px;
 }
 
 .noNotes {

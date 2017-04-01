@@ -1,0 +1,9 @@
+@font-face {
+        font-family: "orange-juice";
+        src: url('./fonts/oj.ttf');
+}
+@font-face {
+        font-family: "pc";
+        src: url('./fonts/print_clearly.ttf');
+        font-weight: 500;
+}

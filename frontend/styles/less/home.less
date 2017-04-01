@@ -31,7 +31,11 @@
 	-webkit-background-clip: padding-box;
 	background-clip:         padding-box;
 }
-
+.text {
+    font-family: 'pc';
+    font-size: 30px;
+    color: #353539;
+}
 /////
 ////LESS
 .homeContainer {
@@ -46,6 +50,9 @@
     justify-content: center;
     min-height: 55px;
     margin: 20px;
+    position: relative;
+    opacity: 1;
+
     
 .refreshButton {
 	width: 200px;
@@ -68,8 +75,13 @@
 
 .NearYou {
     margin: 10px;
-    font-size: 24px;
+    font-size: 30px;
+    font-family: 'pc';
+    font-weight: bold;
+    font-weight: 550;
     text-align: center;
+    position: relative;
+    opacity: 1;
 }
 
 .placesContainer {
@@ -79,10 +91,13 @@
     justify-content: space-around;
     padding: 5px;
     word-wrap: break-word;
-    border-left: thick solid blue;
+    border-left: thick solid black;
     margin: 7px;
-    background-color: #eaecef;
+    background-color: #A9A9AD;
     border-radius: 2px;
+    position: relative;
+    opacity: 1;
+    .text();
     .drop-shadow (0, 2px, 3px, 0, 0.25);
 }
 
@@ -90,31 +105,31 @@
     text-align: center;
     padding: 5px;
     width: 40vw;
+    font-size: 30px;
     
 }
 
 .placeAddress {
     text-align: center;
-//    background-color: burlywood;
+    font-size: 24px;
     padding: 5px;
     width: 40vw;
 }
 
 .homeRating {
     text-align: center;
-//    background-color: greenyellow;
     padding: 5px;
     width: 15vw;
 }
 
 .newRestaurant {
     width: 100%;
-    min-height: 30px;
-    padding-top: 7px;
+    min-height: 70px;
+    padding: 5px;
     position: fixed;
-    bottom: 0;
     text-align: center;
-    background-color: #f9f9ef;
-    font-family: sans-serif;
-    .box-shadow (15px 15px rgba(15, 82, 3, 0.75));
+    background-color: #C6C7CA;
+    .text();
+//    .horizontal-gradient (#55575F, #959699);
+    .box-shadow (5px -5px 3px rgba(0, 0, 0, 0.20));
 }

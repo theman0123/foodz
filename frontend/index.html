@@ -8,11 +8,15 @@
     <link rel="stylesheet" type="text/css" href="./styles/css/home.css" />
     <link rel="stylesheet" type="text/css" href="./styles/css/noteEntry.css" />
     <link rel="stylesheet" type="text/css" href="./styles/css/newNote.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/css/font.css" />
     <title>Foodz</title>
 </head>
 
 <body>
-    <div id="topNavBar">
+    <div class="imageContainer">
+        <img src="images/b_and_white_street.jpg"/>
+    
+        <div id="topNavBar">
         <div class="restaurantLogo" ui-sref="myRestaurants">&#x2302;</div>
         <div class="magGlass" ui-sref="allNotes">&#128269;</div>
         <div class="foodzLogo" ui-sref="home">FOODZ</div>
@@ -27,6 +31,7 @@
     <ui-view>
         <!--ui-router view here-->
     </ui-view>
+    </div>
     
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js">
     </script>

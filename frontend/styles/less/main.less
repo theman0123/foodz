@@ -13,21 +13,42 @@
 	background-image: -ms-linear-gradient(left, @startColor, @endColor);
 	background-image: -o-linear-gradient(left, @startColor, @endColor);
 }
+///fonts///
+.text {
+    font-family: 'pc';
+    font-size: 30px;
+    color: navajowhite;
+}
 ///LESS///
 body {
     height: 100vh;
     width: 100vw;
-    background-color: #f9f9ef;
+//    background-color: #f9f9ef;
+//    background-image: url(../../images/b_and_white_street.jpg);
+}
+
+.imageContainer {
+    position: relative;
+    overflow: hidden;
+    
+    img {
+        height: 100vh;
+        position: absolute;
+        width: 100%;
+        opacity: 0.2; 
+    }
 }
 
 #topNavBar {
     height: 10vh;
     display: flex;
     flex-direction: row;
-    margin-bottom: 15px;
-//    background-color: #A5DFF3;
-    .horizontal-gradient (#5B7DEA, #A5DFF3);
-    .drop-shadow (0, 4px, 6px, 0, 0.25);
+    margin-bottom: 3px;
+    position: relative;
+    opacity: 1;
+    z-index: 2;
+    .horizontal-gradient (#55575F, #959699);
+    .drop-shadow (0, 8px, 6px, 0, 0.55);
 }
 
 .restaurantLogo {
@@ -40,13 +61,13 @@ body {
 .magGlass {
     font-size: 40px;
     padding-top: 10px;
-    padding-left: 20px;
+    padding-left: 60px;
     width: 33vw;
 }
 
 .foodzLogo {
-    font-size: 40px;
+    font-family: 'orange-juice';
+    font-size: 50px;
     padding-top: 15px;
-    margin-right: 5px;
     width: 33vw;
 }

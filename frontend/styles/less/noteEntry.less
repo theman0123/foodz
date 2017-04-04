@@ -1,90 +1,56 @@
-////mixins///
-.drop-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
-	-webkit-box-shadow:	@x @y @blur @spread rgba(0, 0, 0, @alpha);
-	-moz-box-shadow:	@x @y @blur @spread rgba(0, 0, 0, @alpha);
-	box-shadow:		@x @y @blur @spread rgba(0, 0, 0, @alpha);
-}
-.box-shadow (@string) {
-	-webkit-box-shadow: @string;
-	-moz-box-shadow:    @string;
-	box-shadow:         @string;
-}
-.inner-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
-	-webkit-box-shadow: inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
-	-moz-box-shadow:    inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
-	box-shadow:         inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
-}
-.horizontal-gradient (@startColor: #eee, @endColor: white) {
- 	background-color: @startColor;
-	background-image: -webkit-gradient(linear, left top, right top, from(@startColor), to(@endColor));
-	background-image: -webkit-linear-gradient(left, @startColor, @endColor);
-	background-image: -moz-linear-gradient(left, @startColor, @endColor);
-	background-image: -ms-linear-gradient(left, @startColor, @endColor);
-	background-image: -o-linear-gradient(left, @startColor, @endColor);
-}
-.border-radius (@radius: 5px) {
-	-webkit-border-radius: @radius;
-	-moz-border-radius:    @radius;
-	border-radius:         @radius;
-
-	-moz-background-clip:    padding;
-	-webkit-background-clip: padding-box;
-	background-clip:         padding-box;
-}
-.text {
-    font-family: 'pc';
-    font-size: 30px;
-    color: #353539;
-}
+@import 'mixins.less';
 ///LESS/////
 .container {
     max-height: 85vh;
-    display: flex;
-    flex-direction: column;
+    .flex-column;
     overflow-y: scroll;
 }
 
 .placeInfo {
-    display: flex;
-    flex-direction: row;
+    .flex-row;
     width: 100vw;
-
 }
     
 .itemName {
     width: 70vw;
-    font-size: 22px;
+    .title-text;
     text-align: center;
     padding: 5px;
     margin-top: 5px;
+    
 }
 
 .itemRating {
     width: 25vw;
     padding-top: 7px;
-    font-size: 20px;
+    .standard-text;
+    font-weight: bold;
 }
 
 
 .itemContainer {
     height: 15vh;
-    display: flex;
-    flex-direction: column;
+    .flex-row;
     justify-content: space-around;
     padding: 5px;
-    border-left: thick solid black;
+    border-left: thick solid #CF504A;
     margin: 10px;
     background-color: #A9A9AD;
     border-radius: 2px;
     position: relative;
-    opacity: 1;
-    .text();
+    opacity: .9;
+    .standard-text;
     .drop-shadow (0, 2px, 3px, 0, 0.25);
+    
+    &:hover {
+        cursor: pointer;
+        opacity: 1;
+        .drop-shadow (0, 5px, 5px, 0, 0.55)
+    }
 }
 
 .itemTitle {
-    font-size: 40px;
-    font-weight: 800;
+    .title-text;
     text-align: center;
     height: 20%;
 }
@@ -97,17 +63,22 @@
 
 .menuRedirect {
     width: 200px;
-    word-wrap: break-word;
     position: fixed;
     bottom: 0;
     left: 0;
     margin-bottom: 10px;
-//    position: relative;
-    opacity: 1;
+    opacity: .5;
     z-index: 2;
+    .standard-text;
+    
+    &:hover {
+        opacity: 1;
+        color: white;
+        }
+    
     a {
         text-decoration: none;
-        color: gray;
+        color: white;
     }
 }
 
@@ -115,21 +86,23 @@
     position: fixed;
     bottom: 0;
     right: 0;
-    margin-bottom: 10px;
 	width: 100px;
 	height: 35px;
 	line-height: 35px;
 	text-align: center;
     margin: 10px;
+    .standard-text;
+    font-weight: bold;
 	.border-radius (3px);
-	.horizontal-gradient (#45CD2D, #209B0A);
+	.horizontal-gradient (#403B3B, #eee);
 	.box-shadow (3px 5px rgba(15, 82, 3, 0.75));
 	&:active {
 		.box-shadow (1px 2px rgba(0, 0, 0, 0.75));
 		.inner-shadow(0, 5px, 8px, 0, 0.55);
 	}
 	&:hover {
-	cursor: pointer;
+        cursor: pointer;
+        .horizontal-gradient (#A7A4A4, #eee);
 	}
 }
 
@@ -140,11 +113,9 @@
     position: fixed;
     bottom: 0;
     text-align: center;
-    background-color: #C6C7CA;
-    .text();
-//    .horizontal-gradient (#55575F, #959699);
+    background-color: #403B3B;
+    .standard-text;
     .box-shadow (5px -5px 3px rgba(0, 0, 0, 0.20));
-//    height: 200px;
 }
 
 .noNotes {

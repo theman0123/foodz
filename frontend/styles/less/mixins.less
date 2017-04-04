@@ -1,0 +1,55 @@
+////mixins///
+.drop-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
+	-webkit-box-shadow:	@x @y @blur @spread rgba(0, 0, 0, @alpha);
+	-moz-box-shadow:	@x @y @blur @spread rgba(0, 0, 0, @alpha);
+	box-shadow:		@x @y @blur @spread rgba(0, 0, 0, @alpha);
+}
+.box-shadow (@string) {
+	-webkit-box-shadow: @string;
+	-moz-box-shadow:    @string;
+	box-shadow:         @string;
+}
+.inner-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
+	-webkit-box-shadow: inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+	-moz-box-shadow:    inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+	box-shadow:         inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+}
+.horizontal-gradient (@startColor: #eee, @endColor: white) {
+ 	background-color: @startColor;
+	background-image: -webkit-gradient(linear, left top, right top, from(@startColor), to(@endColor));
+	background-image: -webkit-linear-gradient(left, @startColor, @endColor);
+	background-image: -moz-linear-gradient(left, @startColor, @endColor);
+	background-image: -ms-linear-gradient(left, @startColor, @endColor);
+	background-image: -o-linear-gradient(left, @startColor, @endColor);
+}
+.border-radius (@radius: 5px) {
+	-webkit-border-radius: @radius;
+	-moz-border-radius:    @radius;
+	border-radius:         @radius;
+
+	-moz-background-clip:    padding;
+	-webkit-background-clip: padding-box;
+	background-clip:         padding-box;
+}
+////project specific LESS variables////
+.standard-text {
+    font-family: 'pc';
+    font-size: 22px;
+    color: #353539;
+}
+
+.title-text {
+    font-family: 'pc';
+    font-size: 34px;
+    color: #353539;
+    font-weight: 900;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}

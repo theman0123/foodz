@@ -5,5 +5,9 @@
 @font-face {
         font-family: "pc";
         src: url('./fonts/print_clearly.ttf');
-        font-weight: 500;
+}
+@font-face {
+        font-family: "napo";
+        src: url('./fonts/Napo-Regular_TRIAL.ttf');
+        font-weight: bolder;
 }

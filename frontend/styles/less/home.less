@@ -1,52 +1,13 @@
-////mixins///
-.drop-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
-	-webkit-box-shadow:	@x @y @blur @spread rgba(0, 0, 0, @alpha);
-	-moz-box-shadow:	@x @y @blur @spread rgba(0, 0, 0, @alpha);
-	box-shadow:		@x @y @blur @spread rgba(0, 0, 0, @alpha);
-}
-.box-shadow (@string) {
-	-webkit-box-shadow: @string;
-	-moz-box-shadow:    @string;
-	box-shadow:         @string;
-}
-.inner-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
-	-webkit-box-shadow: inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
-	-moz-box-shadow:    inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
-	box-shadow:         inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
-}
-.horizontal-gradient (@startColor: #eee, @endColor: white) {
- 	background-color: @startColor;
-	background-image: -webkit-gradient(linear, left top, right top, from(@startColor), to(@endColor));
-	background-image: -webkit-linear-gradient(left, @startColor, @endColor);
-	background-image: -moz-linear-gradient(left, @startColor, @endColor);
-	background-image: -ms-linear-gradient(left, @startColor, @endColor);
-	background-image: -o-linear-gradient(left, @startColor, @endColor);
-}
-.border-radius (@radius: 5px) {
-	-webkit-border-radius: @radius;
-	-moz-border-radius:    @radius;
-	border-radius:         @radius;
+@import 'mixins.less';
 
-	-moz-background-clip:    padding;
-	-webkit-background-clip: padding-box;
-	background-clip:         padding-box;
-}
-.text {
-    font-family: 'pc';
-    font-size: 30px;
-    color: #353539;
-}
-/////
-////LESS
+////LESS////
 .homeContainer {
     height: 85vh;
-    display: flex;
-    flex-direction: column;
+    .flex-column;
     overflow-y: scroll;
 }
 .refreshButtonContainer {
-    display: flex;
-    flex-direction: row;
+    .flex-row;
     justify-content: center;
     min-height: 55px;
     margin: 20px;
@@ -75,10 +36,7 @@
 
 .NearYou {
     margin: 10px;
-    font-size: 30px;
-    font-family: 'pc';
-    font-weight: bold;
-    font-weight: 550;
+    .title-text;
     text-align: center;
     position: relative;
     opacity: 1;
@@ -86,32 +44,38 @@
 
 .placesContainer {
     min-height: 10vh;
-    display: flex;
-    flex-direction: row;
+    .flex-row;
     justify-content: space-around;
     padding: 5px;
     word-wrap: break-word;
-    border-left: thick solid black;
+    border-left: thick solid #CF504A;
     margin: 7px;
     background-color: #A9A9AD;
     border-radius: 2px;
     position: relative;
-    opacity: 1;
-    .text();
+    opacity: .9;
+    overflow: hidden;
+    .standard-text;
     .drop-shadow (0, 2px, 3px, 0, 0.25);
+    
+    &:hover {
+        cursor: pointer;
+        opacity: 1;
+        .drop-shadow (0, 5px, 5px, 0, 0.55)
+    }
 }
 
 .placeName {
     text-align: center;
     padding: 5px;
     width: 40vw;
-    font-size: 30px;
+    .standard-text;
     
 }
 
 .placeAddress {
     text-align: center;
-    font-size: 24px;
+    .standard-text;
     padding: 5px;
     width: 40vw;
 }
@@ -124,12 +88,13 @@
 
 .newRestaurant {
     width: 100%;
-    min-height: 70px;
-    padding: 5px;
-    position: fixed;
+    height: 50px;
+    padding-top: 15px;
+    position: absolute;
+    bottom: 0;
     text-align: center;
-    background-color: #C6C7CA;
-    .text();
-//    .horizontal-gradient (#55575F, #959699);
+    background-color: #403B3B;
+    .standard-text;
+    color: white;
     .box-shadow (5px -5px 3px rgba(0, 0, 0, 0.20));
 }

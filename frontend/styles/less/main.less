@@ -1,73 +1,67 @@
-
-////mixins///
-.drop-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
-	-webkit-box-shadow:	@x @y @blur @spread rgba(0, 0, 0, @alpha);
-	-moz-box-shadow:	@x @y @blur @spread rgba(0, 0, 0, @alpha);
-	box-shadow:		@x @y @blur @spread rgba(0, 0, 0, @alpha);
-}
-.horizontal-gradient (@startColor: #eee, @endColor: white) {
- 	background-color: @startColor;
-	background-image: -webkit-gradient(linear, left top, right top, from(@startColor), to(@endColor));
-	background-image: -webkit-linear-gradient(left, @startColor, @endColor);
-	background-image: -moz-linear-gradient(left, @startColor, @endColor);
-	background-image: -ms-linear-gradient(left, @startColor, @endColor);
-	background-image: -o-linear-gradient(left, @startColor, @endColor);
-}
-///fonts///
-.text {
-    font-family: 'pc';
-    font-size: 30px;
-    color: navajowhite;
-}
+@import 'mixins.less';
 ///LESS///
 body {
     height: 100vh;
     width: 100vw;
-//    background-color: #f9f9ef;
-//    background-image: url(../../images/b_and_white_street.jpg);
 }
 
 .imageContainer {
     position: relative;
-    overflow: hidden;
+    overflow: visible;//hidden works as well//
     
     img {
         height: 100vh;
         position: absolute;
         width: 100%;
-        opacity: 0.2; 
+        opacity: 0.45; 
     }
 }
 
 #topNavBar {
     height: 10vh;
-    display: flex;
-    flex-direction: row;
+    .flex-row;
     margin-bottom: 3px;
     position: relative;
-    opacity: 1;
+    opacity: .9;
     z-index: 2;
     .horizontal-gradient (#55575F, #959699);
     .drop-shadow (0, 8px, 6px, 0, 0.55);
+    
+    
+    &:hover {
+        opacity: 1;
+    }
 }
 
 .restaurantLogo {
     font-size: 75px;
-    width: 33vw;
+    width: 33%;
     padding-left: 10px;
     margin-top: -10px;
+    
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .magGlass {
     font-size: 40px;
     padding-top: 10px;
     padding-left: 60px;
-    width: 33vw;
+    width: 33%;
+    
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .foodzLogo {
     font-family: 'orange-juice';
     font-size: 50px;
     padding-top: 15px;
-    width: 33vw;
+    width: 33%;
+    
+    &:hover {
+        cursor: pointer;
+    }
 }

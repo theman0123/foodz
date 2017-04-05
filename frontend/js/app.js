@@ -29,6 +29,6 @@ var app = angular.module('foodz', ['ui.router']);
         })
             .state('editNotes', {
                 templateUrl: './views/editNotes.html',
-                url: '/editNotes/:id'
+                url: '/editNotes/:note_id'
         })
     })

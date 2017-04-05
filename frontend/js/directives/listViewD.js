@@ -11,7 +11,7 @@ var app = angular.module('foodz');
             controller: function($scope, mainSrvc, $stateParams, $location) {
                 var idx = $stateParams.id;
                 
-                console.log($location);
+//                console.log($location);
                 
                 $scope.quantity = 4;
 
@@ -24,6 +24,7 @@ var app = angular.module('foodz');
                         $scope.foodz = item;
                     } else {
                         $scope.show = true;
+//                        console.log(item)
                         $scope.foodz = item.filter(function(note) {
                             return note.restaurant_id === parseInt(idx);  
                         })

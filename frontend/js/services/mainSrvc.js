@@ -49,6 +49,10 @@ angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams) {
           console.log('no geolocation');
         }
     }
+
+    this.fbLogin = function() {
+        $http.get('/auth/facebook');
+    }
     
     this.getAllRestaurants = function() {
         return $http.get('/restaurants');

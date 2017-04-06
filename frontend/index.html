@@ -15,23 +15,16 @@
 <body>
     <div class="imageContainer">
         <img src="images/b_and_white_street.jpg"/>
-    
-        <div id="topNavBar">
-        <div class="restaurantLogo" ui-sref="myRestaurants">&#x2302;</div>
-        <div class="magGlass" ui-sref="allNotes">&#128270;</div>
-        <div class="foodzLogo" ui-sref="home">FOODZ</div>
-    </div>
-<!--
-    <div id="sideNavBar">
-        <div id="recent_visits">recent foodz</div>
-        <div ng-repeat="<iterate over 3 most recent notes>"></div>
-        <div id="myPlaces">My Places</div>
-    </div>
--->
-    <ui-view>
-        <!--ui-router view here-->
-    </ui-view>
-    </div>
+            <div id="topNavBar">
+                <div class="restaurantLogo" ui-sref="myRestaurants">&#x2302;</div>
+                <div class="magGlass" ui-sref="allNotes">&#128270;</div>
+                <div class="foodzLogo" ui-sref="home">FOODZ</div>
+            </div>
+
+            <ui-view>
+                <!--ui-router view here-->
+            </ui-view>
+        </div>
     
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js">
     </script>
@@ -42,6 +35,7 @@
     <script src="js/app.js"></script>
     <script src="js/controllers/mainCtrl.js"></script>
     <script src="js/services/mainSrvc.js"></script>
+    <script src="js/controllers/loginCtrl.js"></script>
     <script src="js/controllers/newNoteCtrl.js"></script>
     <script src="js/directives/listViewD.js"></script>
     <script src="js/directives/menuRedirectD.js"></script>

@@ -13,7 +13,9 @@
     "cors": "^2.8.1",
     "express": "^4.15.2",
     "express-session": "^1.15.1",
-    "massive": "^2.6.0"
+    "massive": "^2.6.0",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1"
   },
   "devDependencies": {
     "grunt": "^1.0.1",

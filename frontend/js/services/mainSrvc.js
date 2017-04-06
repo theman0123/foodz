@@ -72,10 +72,13 @@ angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams) {
         $http.post('/restaurant', place);
     }
     
-    this.saveNewNote = function(idx, obj) {
-//        console.log('new note saved', idx, 'noteObj', obj);
-        
-        $http.post('/notes', obj);    
+    this.saveNewNote = function(restaurant_id, noteObj) {
+        console.log('new note saved', restaurant_id, 'noteObj', noteObj);
+        $http.post('/notes', noteObj);    
+    }
+    this.putNote = function(note_id, noteObj) {
+//        console.log(note_id, noteObj)
+        $http.put('/notes', noteObj)
     }
 })
 

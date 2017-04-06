@@ -49,10 +49,10 @@ module.exports = {
     },
     updateNote: function(req, res, next) {
         var path = req.body;
-        
+//        console.log('updat note path', path);
         var message = path.message;
         var photo = path.photo;
-        var note_title = path.note_title;
+        var note_title = path.title;
         var note_id = path.note_id;
         
         db.update_note([message, photo, note_title, note_id], function(err, notes) {

@@ -1,6 +1,13 @@
 angular.module('foodz').controller('loginCtrl', function($scope, mainSrvc, $stateParams){
-    $scope.fbLogin = function() {
-        console.log('in')
-        mainSrvc.fbLogin();
+    
+    $scope.localLogin = function() {
+        console.log('local')
+        
+        var User = {
+            email: $scope.email,
+            password: $scope.password
+        }
+        
+        mainSrvc.localLogin(User)
     }
 })

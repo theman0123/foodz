@@ -54,6 +54,10 @@ angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams) {
         $http.get('/auth/facebook');
     }
     
+    this.localLogin = function(username, password) {
+        $http.post('/login', username, password);
+    }
+    
     this.getAllRestaurants = function() {
         return $http.get('/restaurants');
     }

@@ -1,4 +1,4 @@
-var db = require('../../index.js').get('db');
+//var db = require('../../index.js').get('db');
 
 module.exports = {
     getNotes: function(req, res, next) {

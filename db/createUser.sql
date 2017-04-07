@@ -1,0 +1,1 @@
+-- insert into users (email, password, firstname, lastname, facebook_id) values ('aname', 'bingo');

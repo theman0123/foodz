@@ -1,2 +1,1 @@
-
-insert into users (email, facebook_id) values ($1, $2) returning username, userid;
+insert into users (username, facebook_id) values ($1, $2) on conflict (facebook_id) do update set username = $1 returning username, user_id;

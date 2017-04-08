@@ -7,8 +7,24 @@ var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var LocalStrategy   = require('passport-local').Strategy;
 var mainCtrl = require('./backend/controllers/mainCtrl');
+/////debug//////
+//var debug = require('debug')('http');
+//var http = require('http');
+//var name = 'foodz';
+//
+//debug('booting %s', name);
+//
+//http.createServer(function(req, res){
+//  debug(req.method + ' ' + req.url);
+//  res.end('hello\n');
+//}).listen(3000, function(){
+//  debug('listening');
+//});
+//
+//require('./index.js')
+////end of debugging///
 
-var app = module.exports = express();
+var app = express();
 var port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
@@ -37,7 +53,6 @@ passport.use(new FacebookStrategy({
     function(token, refreshToken, profile, done) {
     console.log('facebook')
         db.getUserByFacebookId([profile.id], function(err, user) {
-            user = user[0];
             if (!user) {
                 console.log('CREATING USER');
                 db.createUserFacebook([profile.displayName, profile.id], function(err, user) {
@@ -51,15 +66,16 @@ passport.use(new FacebookStrategy({
 passport.use('local', new LocalStrategy(
     {usernameField:"email", passwordField:"password"},
   function(username, password, done) {
-      console.log('local')
+      console.log('local-Login email: ', username, ' password: ', password)
     db.users.findOne({
         email: username,
         password: password
     },
     function(err, user) {
-      if (err) { console.log(err);return done(err); }
+      if (err) { console.log('error:', err);return done(err); }
       if (!user) { return done(null, false); }
       if (user.password != password) { return done(null, false); }
+        console.log('all is well in local-Oauth middleware')
       return done(null, user);
     })
   }
@@ -77,10 +93,12 @@ passport.deserializeUser(function(obj, done) {
 app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { 
-                          sucessRedirect: '/home',
-                         failureRedirect: '/login'
+//                          sucessRedirect: '/',
+                          failureRedirect: '/#/failureLogin'
 }), function(req, res, next) {
-    res.send(req.user);
+    
+//    res.send(req.user);
+    res.redirect('/')
 });
 
 app.get('/newEntry', mainCtrl.getNotes);
@@ -112,8 +130,16 @@ app.get('/auth/me', function(req, res) {
 
 app.post('/notes', mainCtrl.postNewNote);
 app.post('/restaurant', mainCtrl.postNewRestaurant);
-app.post('/login', passport.authenticate('local', { failureRedirect: '/asdf' }), function(req, res) {
-  res.status(200).json('success');
+app.post('/login', passport.authenticate('local', {
+//    successRedirect: '/',
+    failureRedirect: '/#/home'
+}), function(req, res) {
+    console.log('heyfriends')
+    if(req.user) {
+        res.send(req.user);
+    } else res.send('error')
+    //returning user info but not redirecting//
+    
 });
 
 app.put('/notes', mainCtrl.updateNote);
@@ -124,3 +150,5 @@ app.delete('/restaurant', mainCtrl.deleteRestaurant);
 app.listen(port, function(){
     console.log('up and running on port ', port)
 })
+
+module.exports = app;

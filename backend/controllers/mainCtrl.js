@@ -1,5 +1,5 @@
-//var db = require('../../index.js').get('db');
-
+//var db = require('./../../index.js')//.get('db'); //won't allow this now...........hmmm....
+//console.log(db)
 module.exports = {
     getNotes: function(req, res, next) {
         var id = req.query.id;

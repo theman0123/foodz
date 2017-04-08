@@ -1,5 +1,8 @@
 @import 'mixins.less';
 ///LESS/////
+.max-height {
+    max-height: inherit;
+}
 .container {
     max-height: 85vh;
     .flex-column;
@@ -18,7 +21,6 @@
     text-align: center;
     padding: 5px;
     margin-top: 5px;
-    
 }
 
 .itemRating {
@@ -40,6 +42,7 @@
     border-radius: 2px;
     position: relative;
     opacity: .9;
+    overflow: hidden;
     .standard-text;
     .drop-shadow (0, 2px, 3px, 0, 0.25);
     

@@ -1,12 +1,13 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var getMainCtrl = require('./backend/controllers/mainCtrl')
 var cors = require('cors');
 var session = require('express-session');
 var massive = require('massive');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var LocalStrategy   = require('passport-local').Strategy;
-var mainCtrl = require('./backend/controllers/mainCtrl');
+
 /////debug//////
 //var debug = require('debug')('http');
 //var http = require('http');
@@ -25,6 +26,7 @@ var mainCtrl = require('./backend/controllers/mainCtrl');
 ////end of debugging///
 
 var app = express();
+
 var port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
@@ -44,6 +46,9 @@ var massiveInstance = massive.connectSync({
 
 app.set('db', massiveInstance);
 var db = app.get('db');
+//pass db through mainCtrl//
+var mainCtrl = getMainCtrl(db);
+//passport-facebook login//
 passport.use(new FacebookStrategy({
     clientID: '273746289751642',
     clientSecret: 'a63a04548509c03ece7db76a5f8b5961',
@@ -63,6 +68,18 @@ passport.use(new FacebookStrategy({
             }
         })
 }));
+
+app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', { 
+//                          sucessRedirect: '/',
+                          failureRedirect: '/#/failureLogin'
+}), function(req, res, next) {
+    
+//    res.send(req.user);
+    res.redirect('/')
+});
+//passport-local login//
 passport.use('local', new LocalStrategy(
     {usernameField:"email", passwordField:"password"},
   function(username, password, done) {
@@ -79,8 +96,32 @@ passport.use('local', new LocalStrategy(
       return done(null, user);
     })
   }
-))
-
+));
+//local login authenticate and post new users//
+app.post('/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) {
+      return next(err); // will generate a 500 error
+    }
+    // Generate a JSON response reflecting authentication status
+    if (! user) {
+      return res.send({ success : false, message : 'authentication failed' });
+    }
+    // ***********************************************************************
+    // "Note that when using a custom callback, it becomes the application's
+    // responsibility to establish a session (by calling req.login()) and send
+    // a response."
+    // Source: http://passportjs.org/docs
+    // ***********************************************************************
+    req.login(user, function(loginErr) {
+      if (loginErr) {
+        return next(loginErr);
+      }
+      return res.send({ success : true, message : 'authentication succeeded' });
+    });      
+  })(req, res, next);
+});
+//salt and desalt//
 passport.serializeUser(function(user, done) {
   done(null, user);
     console.log(user);
@@ -89,58 +130,37 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
+//what is this???
+// not set up/tested//
 
-app.get('/auth/facebook', passport.authenticate('facebook'));
-app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', { 
-//                          sucessRedirect: '/',
-                          failureRedirect: '/#/failureLogin'
-}), function(req, res, next) {
-    
-//    res.send(req.user);
-    res.redirect('/')
-});
+//function isAuthed(req, res, next) {
+//  if (req.user) {
+//    next();
+//  } else {
+//    res.status(403).send({msg: 'YOU SHALL NOT PASS!!!'});
+//  }
+//}
+
+//app.get('/auth/logout', function(req, res) {
+//  req.logout();
+//  res.redirect('/login');
+//});
+//app.get('/auth/me', function(req, res) {
+//  if (req.user) {
+//    console.log(req.user);
+//    res.status(200).send(req.user);
+//  } else {
+//    console.log('NO user!')
+//    res.status(200).send();
+//  }
+//})
 
 app.get('/newEntry', mainCtrl.getNotes);
 app.get('/notes', mainCtrl.getAllNotes);
 app.get('/restaurants', mainCtrl.getAllRestaurants);
-app.get('/auth/logout', function(req, res) {
-  req.logout();
-  res.redirect('/login');
-});
-
-function isAuthed(req, res, next) {
-  if (req.user) {
-    next();
-  } else {
-    res.status(403).send({msg: 'YOU SHALL NOT PASS!!!'});
-  }
-}
-
-
-app.get('/auth/me', function(req, res) {
-  if (req.user) {
-    console.log(req.user);
-    res.status(200).send(req.user);
-  } else {
-    console.log('NO user!')
-    res.status(200).send();
-  }
-})
 
 app.post('/notes', mainCtrl.postNewNote);
 app.post('/restaurant', mainCtrl.postNewRestaurant);
-app.post('/login', passport.authenticate('local', {
-//    successRedirect: '/',
-    failureRedirect: '/#/home'
-}), function(req, res) {
-    console.log('heyfriends')
-    if(req.user) {
-        res.send(req.user);
-    } else res.send('error')
-    //returning user info but not redirecting//
-    
-});
 
 app.put('/notes', mainCtrl.updateNote);
 
@@ -150,5 +170,3 @@ app.delete('/restaurant', mainCtrl.deleteRestaurant);
 app.listen(port, function(){
     console.log('up and running on port ', port)
 })
-
-module.exports = app;

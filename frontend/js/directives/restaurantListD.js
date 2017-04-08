@@ -6,8 +6,6 @@ app.directive('restaurantList', function() {
             restaurants: '='
         },
         controller: function($scope, mainSrvc) {
-            $scope.quantity = 4;
-            ///how do you best do this? $scope.restaurants///
             $scope.restaurants = mainSrvc.getAllRestaurants().then(function(data) {
                 var restaurants = data.data;
                 $scope.restaurants = restaurants; 

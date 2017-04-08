@@ -1,6 +1,5 @@
-//var db = require('./../../index.js')//.get('db'); //won't allow this now...........hmmm....
-//console.log(db)
-module.exports = {
+function controls (db) {
+return {
     getNotes: function(req, res, next) {
         var id = req.query.id;
 
@@ -71,4 +70,7 @@ module.exports = {
     }
 	
 }
+}
+
+module.exports = controls;
     

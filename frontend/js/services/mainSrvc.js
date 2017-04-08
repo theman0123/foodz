@@ -1,4 +1,4 @@
-angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams) {
+angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams, $location) {
     var idx = $stateParams.id;
     var nearArray = [];
     var count = 4;
@@ -56,9 +56,14 @@ angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams) {
     
     this.localLogin = function(email, password) {
         $http.post('/login', email, password).then(function(response) {
-            console.log(response);
+            var data = response.data;
+            
+            if(data.success === true) {
+                console.log(data.message, 'redirecting to home');
+                $location.path('/home');
+            }
         }, function(err) {
-            console.log('error:', error)
+            console.log(data.message)
         })
     }
     

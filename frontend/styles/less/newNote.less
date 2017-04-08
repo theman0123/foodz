@@ -1,9 +1,10 @@
 @import 'mixins.less';
 
 .container {
-    height: 80vh;
+    max-height: 80vh;
     .flex-column;
     justify-content: space-around;
+    overflow-y: scroll;
 }
 
 .restaurantTitle {
@@ -11,6 +12,7 @@
     .title-text;
     position: relative;
     opacity: 1;
+    margin-top: 3px;
 }
 .foodName {
     .standard-text;

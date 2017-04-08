@@ -6,6 +6,6 @@ angular.module('foodz').controller('loginCtrl', function($scope, mainSrvc, $loca
             email: $scope.email,
             password: $scope.password
         }
-            mainSrvc.localLogin(User);
+        mainSrvc.localLogin(User)
     }
 })

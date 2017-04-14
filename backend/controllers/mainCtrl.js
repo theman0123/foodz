@@ -3,7 +3,8 @@ return {
     getNotes: function(req, res, next) {
         var id = req.query.id;
 
-        db.get_notes([id], function(err, notes) {
+//            console.log(user_id, 'backend get_notes')
+        db.get_notes([id, user_id], function(err, notes) {
             res.status(200).json(notes);
         })
     },
@@ -24,16 +25,17 @@ return {
         var title = path.title;
         var message = path.message;
         var photo = path.photo;
-        var restaurant_id = req.body.restaurant_id;
-        
-        db.post_new_note([title, message, photo, restaurant_id], function(err, notes) {
+        var restaurant_id = path.restaurant_id;
+        var user_id = path.user_id;
+        console.log('postnewNote user_id:', user_id, 'req.body', path)
+        db.post_new_note([title, message, photo, restaurant_id, user_id], function(err, notes) {
             res.send(notes);
             
         })
     },
     postNewRestaurant: function(req, res, next) {
         var path = req.body;
-        console.log(req.body);
+        console.log('body for postNewRestaurant:', req.body);
         var name = path.name;
         var address = path.address;
         var slim_address = path.slim_address;
@@ -41,8 +43,9 @@ return {
         var id = path.id;
         var cuisine_type = path.cuisine_type;
         var menu_url = path.menu_url;
-
-        db.post_new_restaurant([name, address, slim_address, rating, id, cuisine_type, menu_url], function(err, restaurants) {
+        var user_id = path.user_id;
+console.log(name, address, slim_address, rating, id, cuisine_type, menu_url, user_id)
+        db.post_new_restaurant([name, address, slim_address, rating, id, cuisine_type, menu_url, user_id], function(err, restaurants) {
             res.send(restaurants);
         })
     },

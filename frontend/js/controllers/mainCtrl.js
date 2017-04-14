@@ -1,14 +1,15 @@
 angular.module('foodz').controller('mainCtrl', function($scope, mainSrvc, $stateParams){
-
+    var user_id = $stateParams.user_id;
     var pullRestaurants = function() {mainSrvc.pullRestaurants()};
+    
     pullRestaurants();
     
     $scope.arrayOfFoodz = mainSrvc.returnArray();
     
-//    console.log($scope.arrayOfFoodz, mainSrvc.returnArray())
+//    console.log(user_id, 'in mainCtrl/home')
     
     $scope.createNewRestaurant = function(place) {
-        mainSrvc.createNewRestaurant(place);
+        mainSrvc.createNewRestaurant(place, user_id);
     }
     
 //    $scope.refresh = function() {
@@ -23,8 +24,4 @@ angular.module('foodz').controller('mainCtrl', function($scope, mainSrvc, $state
 //        $scope.arrayOfFoodz = mainSrvc.returnArray();
 //        console.log('next clicked')
 //    }
-})
-  
-
-//onClick send info to backend and set up a db
-//go to list view with clicked restaurant info loaded into "online menu" and ready to pass along info for when "create new note" is clicked//                                               
+})                                               

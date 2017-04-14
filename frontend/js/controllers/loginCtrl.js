@@ -1,4 +1,4 @@
-angular.module('foodz').controller('loginCtrl', function($scope, mainSrvc, $location){
+angular.module('foodz').controller('loginCtrl', function($scope, mainSrvc, $location, $stateParams){
     
     $scope.localLogin = function() {
     

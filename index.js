@@ -72,12 +72,9 @@ passport.use(new FacebookStrategy({
 app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { 
-//                          sucessRedirect: '/',
                           failureRedirect: '/#/failureLogin'
 }), function(req, res, next) {
-    
-//    res.send(req.user);
-    res.redirect('/')
+        res.redirect('/')
 });
 //passport-local login//
 passport.use('local', new LocalStrategy(
@@ -89,10 +86,10 @@ passport.use('local', new LocalStrategy(
         password: password
     },
     function(err, user) {
+        console.log('user', user)
       if (err) { console.log('error:', err);return done(err); }
       if (!user) { return done(null, false); }
       if (user.password != password) { return done(null, false); }
-        console.log('all is well in local-Oauth middleware')
       return done(null, user);
     })
   }
@@ -105,7 +102,7 @@ app.post('/login', function(req, res, next) {
     }
     // Generate a JSON response reflecting authentication status
     if (! user) {
-      return res.send({ success : false, message : 'authentication failed' });
+      return res.send({ success : false, message : 'authentication failed', user: user });
     }
     // ***********************************************************************
     // "Note that when using a custom callback, it becomes the application's
@@ -117,7 +114,7 @@ app.post('/login', function(req, res, next) {
       if (loginErr) {
         return next(loginErr);
       }
-      return res.send({ success : true, message : 'authentication succeeded' });
+      return res.send({user : user, success : true, message : 'authentication succeeded'});
     });      
   })(req, res, next);
 });

@@ -11,14 +11,13 @@ var app = angular.module('foodz');
             controller: function($scope, mainSrvc, $stateParams, $location) {
                 var idx = $stateParams.id;
                 
-//                console.log($location);
-                
-                $scope.quantity = 4;
+                console.log('noteEntry $stateParams:', $stateParams);
 
                 $scope.place = mainSrvc.returnObject();
 
                 $scope.getFoodz = mainSrvc.getNotes().then(function(response) {
                     var item = response.data;
+                    console.log(item)
                     if(!idx) {
                         $scope.show = false;
                         $scope.foodz = item;

@@ -1,9 +1,10 @@
 angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams, $location) {
     var idx = $stateParams.id;
+    var user_id = $stateParams.user_id;
     var nearArray = [];
     var count = 4;
     var meters = "40,000";
-
+console.log('user_id', user_id)
     var findItem = function(item) {
         var idx = $stateParams.id;
 //        console.log('finditem idx', idx, item.id)
@@ -60,7 +61,7 @@ angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams, $l
             
             if(data.success === true) {
                 console.log(data.message, 'redirecting to home');
-                $location.path('/home');
+                $location.path('/home/' + data.user.user_id);
             }
         }, function(err) {
             console.log(data.message)
@@ -84,13 +85,13 @@ angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams, $l
     
     
     this.createNewRestaurant = function(place) {
-//        console.log('new restaurant created', place);
-        
+        place.user_id = user_id;
+        console.log('new restaurant created', place);
         $http.post('/restaurant', place);
     }
     
-    this.saveNewNote = function(restaurant_id, noteObj) {
-        console.log('new note saved', restaurant_id, 'noteObj', noteObj);
+    this.saveNewNote = function(noteObj) {
+        console.log('new note saved from Service with noteObj', noteObj, 'stateparams', $stateParams);
         $http.post('/notes', noteObj);    
     }
     this.putNote = function(note_id, noteObj) {

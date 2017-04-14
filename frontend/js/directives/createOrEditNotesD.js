@@ -39,17 +39,18 @@ var app = angular.module('foodz');
                     var Note = {
                         title: $scope.title,
                         message: $scope.message,
-                        photo: $scope.photo
+                        photo: $scope.photo,
                     }
+                    Note.user_id = $stateParams.user_id;
+                    console.log('Note:', Note, 'user_id', $stateParams.user_id)
                     ///check if put///
                     if(idx) {
                         Note.note_id = idx;
                         mainSrvc.putNote(idx, Note);
                         ////or post////
                     } else {
-                        console.log('stateParams is', $stateParams)
                         Note.restaurant_id = $stateParams.id;
-                        mainSrvc.saveNewNote($stateParams.id, Note);
+                        mainSrvc.saveNewNote(Note);
                     }
                     $scope.title = '';
                     $scope.message = 'Added!';

@@ -3,7 +3,7 @@
     <div class="itemName" ng-show="show"> {{ restaurant.name }}</div>
     <div class="itemRating" ng-show="show"> >>{{ restaurant.rating }}</div>
 </div>
-<div class="itemContainer" ui-sref="editNotes({note_id: note.note_id, user_id: user_id})" ng-repeat="note in foodz | filter:search">
+<div class="itemContainer" ui-sref="editNotes({note_id: note.note_id, user_id: user_id, id: note.restaurant_id})" ng-repeat="note in foodz | filter:search">
     <div class="itemTitle">{{ note.note_title }}</div>
     <div class="itemMessage"> {{ note.note_message }}</div>
 </div>

@@ -9,6 +9,7 @@ app.directive('menuRedirect', function() {
         },
         controller: function($scope, mainSrvc, $stateParams) {
             var idx = $stateParams.id;
+            
             $scope.item = mainSrvc.findRestaurant(idx);
         }
     }

@@ -19,37 +19,41 @@ var app = angular.module('foodz');
 
                 $scope.getNote = mainSrvc.getNotes().then(function(response) {
                     var notes = response.data;
+                    
                     var noteObj = notes.find(function(object) {
         
                         return object.note_id === parseInt(idx);
                     })  
-                        console.log('idx true?', idx, 'noteObj', noteObj.restaurant_id)
-                    ///only runs when updating a note/// 
+                        
+                    console.log('idx true?', idx, 'noteObj', noteObj)
+                    
+                    /// update a note/// 
                     if(idx){
-//                        $scope.restaurant = mainSrvc.findRestaurant();
                         $scope.message = noteObj.note_message;
                         $scope.title = noteObj.note_title;
-                        $scope.restaurant_id = noteObj.restaurant_id;
                     }
                 })
-                /////////////////////////////////////
+                /// end of update ///
+                
                 $scope.saveNote = function() {
-                    //build note//
+
                     var Note = {
                         title: $scope.title,
                         message: $scope.message,
                         photo: $scope.photo,
+                        user_id: $stateParams.user_id
                     }
-                    Note.user_id = $stateParams.user_id;
+
                     ///check if put///
                     if(idx) {
                         Note.note_id = idx;
                         mainSrvc.putNote(idx, Note);
-                        ////else post////
-                    } else {
+                    } 
+                    ////else post////
+                    else {
                         Note.restaurant_id = $stateParams.id;
                         mainSrvc.saveNewNote(Note);
-                        /////go to new view/////
+                    /////go to noteList view/////
                     }
                 }
             },

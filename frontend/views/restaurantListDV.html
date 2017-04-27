@@ -1,7 +1,7 @@
 
 <input type="text" class="searchBar" ng-model="search" placeholder="Search Restaurants...">
-    <div class="itemContainer" ui-sref="noteEntry({id: place.id})" ng-repeat="place in restaurants | filter:search">
-    <div class="itemTitle">{{ place.name }}</div>
-    <div class="itemMessage"> {{ place.rating }}</div>
+    <div class="itemContainer" ui-sref="noteEntry({id: restaurant})" ng-repeat="restaurant in restaurantList | filter:search">
+    <div class="itemTitle">{{ restaurant.name }}</div>
+    <div class="itemMessage"> {{ restaurant.rating }}</div>
 </div>
 <div class="bottomContainer">Select A Restaurant To View It's Notes</div>

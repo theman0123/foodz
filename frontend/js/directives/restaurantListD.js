@@ -8,9 +8,10 @@ app.directive('restaurantList', function() {
         controller: function($scope, mainSrvc, $stateParams) {
             $scope.user_id = $stateParams.user_id;
             
-            $scope.restaurants = mainSrvc.getAllRestaurants().then(function(data) {
-                var restaurants = data.data;
-                $scope.restaurants = restaurants; 
+            $scope.getRestaurantList = mainSrvc.getAllRestaurants().then(function(data) {
+                var restaurantList = data.data;
+                
+                $scope.restaurantList = restaurantList; 
             })
         }
     }

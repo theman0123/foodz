@@ -2,15 +2,9 @@ angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams, $l
     var idx = $stateParams.id;
     var user_id = $stateParams.user_id;
     var nearArray = [];
-    var count = 4;
     var meters = "40,000";
-console.log('user_id', user_id)
-    var findItem = function(item) {
-        var idx = $stateParams.id;
-//        console.log('finditem idx', idx, item.id)
-        return item.id === idx;
-    }
     
+    /// home functions ///
     var getFoodz = function(lat, lon) {
         
         if(lat && lon) {    
@@ -36,6 +30,7 @@ console.log('user_id', user_id)
             })   
         }
     }
+    
     this.pullRestaurants = function () {
         
         if ("geolocation" in navigator) {
@@ -50,7 +45,9 @@ console.log('user_id', user_id)
           console.log('no geolocation');
         }
     }
-
+    /// End Home functions ///
+    
+    ///Login functions///
     this.fbLogin = function() {
         $http.get('/auth/facebook');
     }
@@ -67,11 +64,38 @@ console.log('user_id', user_id)
             console.log(data.message)
         })
     }
+    ///End Login Functions///
+    
+    /// Foodz database functions ///
     
     this.getAllRestaurants = function() {
-        console.log('mainSrvc')
+        console.log('pulling restaurants from foodz database')
         return $http.get('/restaurants');
     }
+    
+    this.getNotes = function() {
+        return $http.get('/notes');
+    }
+    
+    this.createNewRestaurant = function(restaurant) {
+        console.log('restaurant created/updated:', restaurant);
+        
+        $http.post('/restaurant', restaurant);
+    }
+    
+    this.saveNewNote = function(noteObj) {
+        console.log('new noteObj saved to foodz database:', noteObj);
+        
+        $http.post('/notes', noteObj);    
+    }
+    this.putNote = function(note_id, noteObj) {
+        console.log('note updated:', note_id, noteObj)
+        
+        $http.put('/notes', noteObj)
+    }
+    
+    /// misc functions ///
+    
     this.getLocalRestaurants = function() {
         console.log('getLocalRestaurants', nearArray)
         return nearArray;
@@ -80,25 +104,9 @@ console.log('user_id', user_id)
     this.findRestaurant = function() {
         return nearArray.find(findItem);
     }
-
-    this.getNotes = function() {
-        return $http.get('/notes');
-    }
     
-    
-    this.createNewRestaurant = function(place) {
-        place.user_id = user_id;
-        console.log('restaurant created/updated:', place);
-        $http.post('/restaurant', place);
-    }
-    
-    this.saveNewNote = function(noteObj) {
-        console.log('new note saved from Service with noteObj', noteObj);
-        $http.post('/notes', noteObj);    
-    }
-    this.putNote = function(note_id, noteObj) {
-        console.log('note updated:', note_id, noteObj)
-        $http.put('/notes', noteObj)
+    var findItem = function(item) {
+        return item.id === $stateParams.id;
     }
 })
 

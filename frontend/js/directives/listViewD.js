@@ -18,13 +18,13 @@ var app = angular.module('foodz');
 
                 var getFoodz = mainSrvc.getNotes().then(function(response) {
                     var item = response.data;
-                    console.log(item)
+
                     if(!idx) {
                         $scope.show = false;
                         $scope.foodz = item;
                     } else {
                         $scope.show = true;
-//                        console.log(item)
+
                         $scope.foodz = item.filter(function(note) {
                             return note.restaurant_id === parseInt(idx);  
                         })

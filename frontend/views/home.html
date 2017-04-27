@@ -1,9 +1,9 @@
 <div class=homeContainer>
     <div class="NearYou">Near You Now</div>
-    <div class="placesContainer" ng-click="createNewRestaurant(place)" ui-sref="noteEntry({id: place.id, user_id: user_id})" ng-repeat="place in arrayOfFoodz">
-        <div class="placeName">{{ place.name }}</div>
-        <div class="placeAddress">{{ place.slimAddress }}</div>
-        <div class="homeRating">>>{{ place.rating }}</div>
+    <div class="placesContainer" ng-click="createNewRestaurant(restaurant)" ui-sref="noteEntry({id: restaurant.id, user_id: user_id})" ng-repeat="restaurant in restaurantList">
+        <div class="placeName">{{ restaurant.name }}</div>
+        <div class="placeAddress">{{ restaurant.slimAddress }}</div>
+        <div class="homeRating">>>{{ restaurant.rating }}</div>
     </div>
 </div>
     <div class="newRestaurant">Click On A Restaurant To Add Or View Notes</div>

@@ -1,10 +1,10 @@
 angular.module('foodz').controller('mainCtrl', function($scope, mainSrvc, $stateParams){
-    var user_id = $stateParams.user_id;
+    $scope.user_id = $stateParams.user_id;
     var pullRestaurants = function() {mainSrvc.pullRestaurants()};
     
     pullRestaurants();
     
-    $scope.arrayOfFoodz = mainSrvc.returnArray();
+    $scope.arrayOfFoodz = mainSrvc.getLocalRestaurants();
     
 //    console.log(user_id, 'in mainCtrl/home')
     
@@ -21,7 +21,7 @@ angular.module('foodz').controller('mainCtrl', function($scope, mainSrvc, $state
 //        //@param amount number of next restaurants
 //        //@param last visible
 //        var nextRest = mainService.next(4, $scope.arrayOfFoodz.indexOf(last))
-//        $scope.arrayOfFoodz = mainSrvc.returnArray();
+//        $scope.arrayOfFoodz = mainSrvc.getLocalRestaurants();
 //        console.log('next clicked')
 //    }
 })                                               

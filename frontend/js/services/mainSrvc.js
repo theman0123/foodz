@@ -24,7 +24,7 @@ console.log('user_id', user_id)
 
                     var Restaurant = {
                         name: item.restaurant.name,
-                        address: item.restaurant.location.address,
+                        address: path,
                         slimAddress: path.substring(0, path.length - 10) + "...",
                         rating: Math.floor(item.restaurant.user_rating.aggregate_rating),
                         id: item.restaurant.id,
@@ -69,13 +69,15 @@ console.log('user_id', user_id)
     }
     
     this.getAllRestaurants = function() {
+        console.log('mainSrvc')
         return $http.get('/restaurants');
     }
-    this.returnArray = function() {
+    this.getLocalRestaurants = function() {
+        console.log('getLocalRestaurants', nearArray)
         return nearArray;
     }
     
-    this.returnObject = function() {
+    this.findRestaurant = function() {
         return nearArray.find(findItem);
     }
 
@@ -86,16 +88,16 @@ console.log('user_id', user_id)
     
     this.createNewRestaurant = function(place) {
         place.user_id = user_id;
-        console.log('new restaurant created', place);
+        console.log('restaurant created/updated:', place);
         $http.post('/restaurant', place);
     }
     
     this.saveNewNote = function(noteObj) {
-        console.log('new note saved from Service with noteObj', noteObj, 'stateparams', $stateParams);
+        console.log('new note saved from Service with noteObj', noteObj);
         $http.post('/notes', noteObj);    
     }
     this.putNote = function(note_id, noteObj) {
-//        console.log(note_id, noteObj)
+        console.log('note updated:', note_id, noteObj)
         $http.put('/notes', noteObj)
     }
 })

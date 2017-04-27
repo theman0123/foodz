@@ -10,12 +10,13 @@ var app = angular.module('foodz');
             },
             controller: function($scope, mainSrvc, $stateParams, $location) {
                 var idx = $stateParams.id;
+                $scope.user_id = $stateParams.user_id;
                 
                 console.log('noteEntry $stateParams:', $stateParams);
 
-                $scope.place = mainSrvc.returnObject();
+                $scope.restaurant = mainSrvc.findRestaurant();
 
-                $scope.getFoodz = mainSrvc.getNotes().then(function(response) {
+                var getFoodz = mainSrvc.getNotes().then(function(response) {
                     var item = response.data;
                     console.log(item)
                     if(!idx) {

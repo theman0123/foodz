@@ -13,12 +13,13 @@
 </head>
 
 <body>
+    /*stateParams is an empty object with params inside the empty object*/
     <div class="imageContainer">
         <img src="images/b_and_white_street.jpg"/>
-            <div id="topNavBar">
-                <div class="restaurantLogo" ui-sref="myRestaurants">&#x2302;</div>
-                <div class="magGlass" ui-sref="allNotes">&#128270;</div>
-                <div class="foodzLogo" ui-sref="home">FOODZ</div>
+            <div id="topNavBar" ng-controller="navBarCtrl">
+                <div class="restaurantLogo" ui-sref="myRestaurants({user_id: $stateParams.user_id})">&#x2302;</div>
+                <div class="magGlass" ui-sref="allNotes({user_id: user_id})">&#128270;</div>
+                <div class="foodzLogo" ui-sref="home({user_id: user_id, id: restaurant_id})">FOODZ</div>
             </div>
 
             <ui-view>
@@ -36,7 +37,7 @@
     <script src="js/controllers/mainCtrl.js"></script>
     <script src="js/services/mainSrvc.js"></script>
     <script src="js/controllers/loginCtrl.js"></script>
-    <script src="js/controllers/newNoteCtrl.js"></script>
+    <script src="js/controllers/navBarCtrl.js"></script>
     <script src="js/directives/listViewD.js"></script>
     <script src="js/directives/menuRedirectD.js"></script>
     <script src="js/directives/newNoteD.js"></script>

@@ -5,7 +5,9 @@ app.directive('restaurantList', function() {
         scope: {
             restaurants: '='
         },
-        controller: function($scope, mainSrvc) {
+        controller: function($scope, mainSrvc, $stateParams) {
+            $scope.user_id = $stateParams.user_id;
+            
             $scope.restaurants = mainSrvc.getAllRestaurants().then(function(data) {
                 var restaurants = data.data;
                 $scope.restaurants = restaurants; 

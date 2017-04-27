@@ -15,6 +15,7 @@ return {
     },
     getAllRestaurants: function(req, res, next) {
         db.get_all_restaurants(function(err, restaurants){
+            console.log('pulling restuarants from database...', restaurants)
             res.send(restaurants);
         })
     },

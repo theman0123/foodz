@@ -22,7 +22,7 @@ var app = angular.module('foodz', ['ui.router']);
             .state('newNote', {
                 templateUrl: './views/newNote.html',
                 url: '/newNote/:id/:user_id', 
-                controller: 'newNoteCtrl'
+//                controller: 'newNoteCtrl'
         })
             .state('allNotes', {
                 templateUrl: './views/allNotes.html',
@@ -34,6 +34,6 @@ var app = angular.module('foodz', ['ui.router']);
         })
             .state('editNotes', {
                 templateUrl: './views/editNotes.html',
-                url: '/editNotes/:note_id'
+                url: '/editNotes/:note_id/:user_id'
         })
     })

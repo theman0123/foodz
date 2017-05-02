@@ -34,11 +34,39 @@ app.use(cors());
 app.use(express.static(__dirname + '/frontend'));
 app.use(session({
     secret: "I am nerdier than most",//put in different file and export//s
-    saveUninitialized: false,
-    resave: true
+    saveUninitialized: true,
+    resave: true,
+    cookie: { maxAge: 60000 }
 }));
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session({
+  cookieName: 'session',
+  secret: 'eg[isfd-8yF9-7w2315df{}+Ijsli;;to8',
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+  httpOnly: true,
+  secure: true,
+  ephemeral: true
+}));
+/// using session as global validation //
+app.use(function(req, res, next) {
+    if (req.session && req.session.user) {
+        console.log('reqsession.user', req.session.user);
+    db.users.findOne({ email: req.session.user.email }, function(err, user) {
+      if (user) {
+        req.user = user;
+        delete req.user.password; // delete the password from the session
+        req.session.user = user;  //refresh the session value
+        res.locals.user = user;
+      }
+      // finishing processing the middleware and run the route
+      next();
+    });
+  } else {
+      console.log('reqsession.user', req.session.user);
+    next();
+  }
+})
 
 var massiveInstance = massive.connectSync({
     connectionString: "postgres://postgres:postgres@localhost/foodz"
@@ -97,12 +125,14 @@ passport.use('local', new LocalStrategy(
 //local login authenticate and post new users//
 app.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
+    
     if (err) {
       return next(err); // will generate a 500 error
     }
     // Generate a JSON response reflecting authentication status
     if (! user) {
-      return res.send({ success : false, message : 'authentication failed', user: user });
+        req.session.reset();
+        return res.send({ success : false, message : 'authentication failed', user: user });
     }
     // ***********************************************************************
     // "Note that when using a custom callback, it becomes the application's
@@ -114,6 +144,7 @@ app.post('/login', function(req, res, next) {
       if (loginErr) {
         return next(loginErr);
       }
+        req.session.user = user;
       return res.send({user : user, success : true, message : 'authentication succeeded'});
     });      
   })(req, res, next);
@@ -127,21 +158,12 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
-//what is this???
-// not set up/tested//
 
-//function isAuthed(req, res, next) {
-//  if (req.user) {
-//    next();
-//  } else {
-//    res.status(403).send({msg: 'YOU SHALL NOT PASS!!!'});
-//  }
-//}
-
-//app.get('/auth/logout', function(req, res) {
-//  req.logout();
-//  res.redirect('/login');
-//});
+/// not working ///
+app.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/login').send('you\'ve been logged out');
+});
 //app.get('/auth/me', function(req, res) {
 //  if (req.user) {
 //    console.log(req.user);
@@ -151,9 +173,16 @@ passport.deserializeUser(function(obj, done) {
 //    res.status(200).send();
 //  }
 //})
+function requireLogin (req, res, next) {
+  if (!req.user) {
+    res.redirect('/login');
+  } else {
+    next();
+  }
+};
 
 app.get('/newEntry', mainCtrl.getNotes);
-app.get('/notes', mainCtrl.getAllNotes);
+app.get('/notes', requireLogin, mainCtrl.getAllNotes);
 app.get('/restaurants', mainCtrl.getAllRestaurants);
 
 app.post('/notes', mainCtrl.postNewNote);

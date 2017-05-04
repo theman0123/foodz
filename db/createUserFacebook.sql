@@ -1,1 +1,5 @@
-insert into users (username, facebook_id) values ($1, $2) on conflict (facebook_id) do update set username = $1 returning username, user_id;
+INSERT INTO users (username, facebook_id) 
+VALUES ($1, $2) 
+    ON CONFLICT (facebook_id) 
+        DO UPDATE username = $1 
+        RETURNING username, user_id;

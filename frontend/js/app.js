@@ -5,6 +5,11 @@ var app = angular.module('foodz', ['ui.router']);
         $urlRouterProvider.otherwise('/home');
         
         $stateProvider
+            .state('NewUser', {
+                templateUrl: './views/newUser.html',
+                url: '/newUser',
+                controller: 'loginCtrl'
+        })
             .state('login', {
                 templateUrl: './views/login.html',
                 url: '/login',

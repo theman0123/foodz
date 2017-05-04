@@ -1,2 +1,2 @@
-delete from restaurants
-where restaurant_id = $1;
+DELETE FROM restaurants
+WHERE restaurant_id = $1;

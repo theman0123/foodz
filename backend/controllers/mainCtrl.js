@@ -3,7 +3,6 @@ return {
     getNotes: function(req, res, next) {
         var id = req.query.id;
 
-//            console.log(user_id, 'backend get_notes')
         db.get_notes([id, user_id], function(err, notes) {
             res.status(200).json(notes);
         })
@@ -15,12 +14,22 @@ return {
     },
     getAllRestaurants: function(req, res, next) {
         db.get_all_restaurants(function(err, restaurants){
-            console.log('pulling restuarants from database...', restaurants)
             res.send(restaurants);
         })
     },
+    postNewUser: function(req, res, next) {
+        var path = req.body;
+        
+        var username = path.username;
+        var email = path.email;
+        var password = path.password;
+        
+        db.newUser([username, email, password], function(err, user) {
+//            console.log('err:', err, 'user:', user);
+            res.send(user);
+        })
+    },
     postNewNote: function(req, res, next) {
-
         var path = req.body;
         
         var title = path.title;
@@ -28,7 +37,9 @@ return {
         var photo = path.photo;
         var restaurant_id = path.restaurant_id;
         var user_id = path.user_id;
-        console.log('postnewNote user_id:', user_id, 'req.body', path)
+        
+        console.log('postnewNote user_id:', user_id, 'req.body', path);
+        
         db.post_new_note([title, message, photo, restaurant_id, user_id], function(err, notes) {
             res.send(notes);
             
@@ -36,7 +47,7 @@ return {
     },
     postNewRestaurant: function(req, res, next) {
         var path = req.body;
-        console.log('body for postNewRestaurant:', req.body);
+        
         var name = path.name;
         var address = path.address;
         var slim_address = path.slim_address;
@@ -45,14 +56,16 @@ return {
         var cuisine_type = path.cuisine_type;
         var menu_url = path.menu_url;
         var user_id = path.user_id;
-console.log(name, address, slim_address, rating, id, cuisine_type, menu_url, user_id)
+        
+        console.log('body for postNewRestaurant:', req.body);
+        
         db.post_new_restaurant([name, address, slim_address, rating, id, cuisine_type, menu_url, user_id], function(err, restaurants) {
             res.send(restaurants);
         })
     },
     updateNote: function(req, res, next) {
         var path = req.body;
-//        console.log('updat note path', path);
+        
         var message = path.message;
         var photo = path.photo;
         var note_title = path.title;

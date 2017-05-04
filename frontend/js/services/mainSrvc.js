@@ -47,7 +47,14 @@ angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams, $l
     }
     /// End Home functions ///
     
-    ///Login functions///
+    ///New User and Login functions///
+    this.newUser = function(newUserObj) {
+        $http.post('newUser', newUserObj)
+            .then(function(response) {
+            console.log('response from newUser:', response)
+                $location.path('/login');
+        })
+    }
     this.fbLogin = function() {
         $http.get('/auth/facebook');
     }

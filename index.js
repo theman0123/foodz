@@ -185,6 +185,7 @@ app.get('/newEntry', mainCtrl.getNotes);
 app.get('/notes', requireLogin, mainCtrl.getAllNotes);
 app.get('/restaurants', mainCtrl.getAllRestaurants);
 
+app.post('/newUser', mainCtrl.postNewUser);
 app.post('/notes', mainCtrl.postNewNote);
 app.post('/restaurant', mainCtrl.postNewRestaurant);
 

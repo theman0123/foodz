@@ -1,1 +1,1 @@
-select * from notes;
+SELECT * FROM notes;

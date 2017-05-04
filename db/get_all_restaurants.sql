@@ -1,1 +1,1 @@
-select * from restaurants;
+SELECT * FROM restaurants;

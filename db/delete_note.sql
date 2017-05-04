@@ -1,2 +1,2 @@
-delete from notes
-where note_id = $1;
+DELETE FROM notes
+WHERE note_id = $1;

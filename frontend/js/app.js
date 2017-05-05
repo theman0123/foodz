@@ -2,7 +2,7 @@ var app = angular.module('foodz', ['ui.router']);
 
     app.config(function($urlRouterProvider, $stateProvider) {
         
-        $urlRouterProvider.otherwise('/home');
+        $urlRouterProvider.otherwise('/login');
         
         $stateProvider
             .state('NewUser', {

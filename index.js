@@ -1,7 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var getMainCtrl = require('./backend/controllers/mainCtrl')
-var cors = require('cors');
 var session = require('express-session');
 var massive = require('massive');
 var passport = require('passport');
@@ -30,7 +29,7 @@ var app = express();
 var port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
-app.use(cors());
+//app.use(cors());
 app.use(express.static(__dirname + '/frontend'));
 app.use(session({
     secret: "I am nerdier than most",//put in different file and export//s

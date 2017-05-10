@@ -2,6 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var getMainCtrl = require('./backend/controllers/mainCtrl')
 var session = require('express-session');
+var redis = require('redis');
+var RedisStore = require('connect-redis')(session);
 var massive = require('massive');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
@@ -11,32 +13,43 @@ var LocalStrategy   = require('passport-local').Strategy;
 //var debug = require('debug')('http');
 //var http = require('http');
 //var name = 'foodz';
-//
+
 //debug('booting %s', name);
-//
+
 //http.createServer(function(req, res){
 //  debug(req.method + ' ' + req.url);
 //  res.end('hello\n');
 //}).listen(3000, function(){
 //  debug('listening');
 //});
-//
+
 //require('./index.js')
 ////end of debugging///
-
 var app = express();
 
 var port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
-//app.use(cors());
+
 app.use(express.static(__dirname + '/frontend'));
+
+
+//redisOpts = {
+//    unref: false
+//    client: client 
+//}
+    
+var client = redis.createClient();
+var sessionStore = new RedisStore({ client: client });
+
 app.use(session({
-    secret: "I am nerdier than most",//put in different file and export//s
+    store: sessionStore,
+    secret: "I am nerdier than most",//put in different file and module.export?//
     saveUninitialized: true,
     resave: true,
     cookie: { maxAge: 60000 }
 }));
+
 app.use(passport.initialize());
 app.use(passport.session({
   cookieName: 'session',
@@ -62,7 +75,7 @@ app.use(function(req, res, next) {
       next();
     });
   } else {
-      console.log('reqsession.user', req.session.user);
+      console.log('req.session.user', req.session.user);
     next();
   }
 })

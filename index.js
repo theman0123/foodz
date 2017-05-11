@@ -82,12 +82,12 @@ app.use(function(req, res, next) {
   }
 })
 
-var massiveInstance = massive.connectSync({
-    connectionString: "postgres://postgres:postgres@localhost/foodz"
-});
+//var massiveInstance = massive.connectSync({
+//    connectionString: "postgres://postgres:postgres@localhost/foodz"
+//});
 
-app.set('db', massiveInstance);
-var db = app.get('db');
+//app.set('db', massiveInstance);
+//var db = app.get('db');
 //pass db through mainCtrl//
 var mainCtrl = getMainCtrl(db);
 //passport-facebook login//

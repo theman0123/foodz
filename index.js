@@ -41,11 +41,11 @@ app.set('view engine', 'ejs');
 //    client: client 
 //}
     
-//var client = redis.createClient();
-//var sessionStore = new RedisStore({ client: client });
+var client = redis.createClient();
+var sessionStore = new RedisStore({ client: client });
 
 app.use(session({
-//    store: sessionStore,
+    store: sessionStore,
     secret: "I am nerdier than most",//put in different file and module.export?//
     saveUninitialized: true,
     resave: true,
@@ -124,6 +124,7 @@ passport.use('local', new LocalStrategy(
     {usernameField:"email", passwordField:"password"},
   function(username, password, done) {
       console.log('local-Login email: ', username, ' password: ', password)
+      //fix these db calls.... how?////
     db.users.findOne({
         email: username,
         password: password

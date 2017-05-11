@@ -89,7 +89,7 @@ app.use(function(req, res, next) {
 //app.set('db', massiveInstance);
 //var db = app.get('db');
 //pass db through mainCtrl//
-var mainCtrl = getMainCtrl(db);
+//var mainCtrl = getMainCtrl(db);
 //passport-facebook login//
 passport.use(new FacebookStrategy({
     clientID: '273746289751642',

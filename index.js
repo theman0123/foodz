@@ -27,12 +27,14 @@ var LocalStrategy   = require('passport-local').Strategy;
 ////end of debugging///
 var app = express();
 
-var port = process.env.PORT || 3000;
+app.set('port', (process.env.PORT || 3000));
 
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/frontend'));
-
+//copying heroku docs//
+app.set('frontend', __dirname + '/frontend');
+app.set('view engine', 'ejs');
 
 //redisOpts = {
 //    unref: false
@@ -206,6 +208,6 @@ app.put('/notes', mainCtrl.updateNote);
 app.delete('/notes', mainCtrl.deleteNote);
 app.delete('/restaurant', mainCtrl.deleteRestaurant);
 
-app.listen(port, function(){
-    console.log('up and running on port ', port)
+app.listen(app.get('port'), function(){
+    console.log('up and running on port ', app.get('port'))
 })

@@ -4,7 +4,9 @@ var getMainCtrl = require('./backend/controllers/mainCtrl')
 var session = require('express-session');
 var redis = require('redis');
 var RedisStore = require('connect-redis')(session);
-var massive = require('massive');
+var pg = require('pg');
+var Pool = require('pg').Pool;
+//var massive = require('massive');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var LocalStrategy   = require('passport-local').Strategy;
@@ -62,6 +64,32 @@ app.use(passport.session({
   secure: true,
   ephemeral: true
 }));
+
+///setup pg database ///
+pg.defaults.ssl = true;
+var conString = 'postgres://postgres:postgres@localhost/foodz';
+var config = {
+  user: 'PGUSER', //env var: PGUSER 
+  database: 'foodz', //env var: PGDATABASE 
+  password: 'secret hey hey hey hey', //env var: PGPASSWORD 
+  host: 'localhost', // Server hosting the postgres database 
+  port: 3000, //env var: PGPORT 
+  max: 10, // max number of clients in the pool 
+  idleTimeoutMillis: 60000, // how long a client is allowed to remain idle before being closed 
+};
+var pool = new Pool(config);
+console.log(pool);
+/// trying to get pool setup ///
+pg.connect(conString, function(err, client, done) {
+    if(err) return console.error('error', err)
+    client.query('SELECT * FROM notes;', function (err, result){
+        console.log('pg pool', result);
+        done(err)
+    })
+//    .on('row', function(row) {
+//      console.log(JSON.stringify(row));
+//    });
+})
 /// using session as global validation //
 app.use(function(req, res, next) {
     if (req.session && req.session.user) {

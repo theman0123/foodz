@@ -109,16 +109,17 @@ app.use(function(req, res, next) {
     next();
   }
 })
-
-var massiveInstance = massive.connectSync({
-    connectionString: process.env.DATABASE_URL
-});
-
+//setup for massive and database//
+sslmode= require;
+process.env.DATABASE_URL = "postgres://postgres:postgres@localhost/foodz";
+var connectionString = process.env.DATABASE_URL;
+var massiveInstance = massive.connectSync({connectionString});
 app.set('db', massiveInstance);
 var db = app.get('db');
+
 //pass db through mainCtrl//
-//db
 var mainCtrl = getMainCtrl(db);
+
 //passport-facebook login//
 passport.use(new FacebookStrategy({
     clientID: '273746289751642',
@@ -169,7 +170,7 @@ passport.use('local', new LocalStrategy(
 //local login authenticate and post new users//
 app.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
-    
+    console.log('172', err, user, info)
     if (err) {
       return next(err); // will generate a 500 error
     }
@@ -185,6 +186,7 @@ app.post('/login', function(req, res, next) {
     // Source: http://passportjs.org/docs
     // ***********************************************************************
     req.login(user, function(loginErr) {
+        console.log('line188', user, loginErr)
       if (loginErr) {
         return next(loginErr);
       }

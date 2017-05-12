@@ -68,7 +68,7 @@ angular.module('foodz').service('mainSrvc', function($http, $q, $stateParams, $l
                 $location.path('/home/' + data.user.user_id);
             }
         }, function(err) {
-            console.log(data.message)
+            console.log(err.statusText)
         })
     }
     ///End Login Functions///

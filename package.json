@@ -20,7 +20,7 @@
     "debug": "^2.6.3",
     "express": "^4.15.2",
     "express-session": "^1.15.1",
-    "massive": "^2.6.0",
+    "massive": "^2.6.1",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "passport-local": "^1.0.0",

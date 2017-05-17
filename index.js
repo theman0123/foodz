@@ -29,7 +29,6 @@ var LocalStrategy   = require('passport-local').Strategy;
 ////end of debugging///
 var app = express();
 
-app.set('port', (process.env.PORT || 3000));
 
 app.use(bodyParser.json());
 
@@ -239,6 +238,8 @@ app.put('/notes', mainCtrl.updateNote);
 
 app.delete('/notes', mainCtrl.deleteNote);
 app.delete('/restaurant', mainCtrl.deleteRestaurant);
+
+app.set('port', (process.env.PORT || 3000));
 
 app.listen(app.get('port'), function(){
     console.log('up and running on port ', app.get('port'))
